@@ -1,0 +1,69 @@
+<br><br>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="text-center mb-4">Actualización de Donantes</h2> <!-- Título centrado -->
+  
+        <form action="" class="form-horizontal">
+
+            <div class="form-group">
+                <label for="">Id:</label>
+                <input type="text" name="Id donante" id="idDonante"
+                    placeholder="iddonante" class="form-control" [(ngModel)]="donante_id_input"  [disabled]="idInputDisabled">
+              </div>
+
+              <div class="form-group">
+                <label for="">Tipo de Donador:</label>
+                <select class="form-control" id="tipo" name="tipo" [(ngModel)] = "tipo_donante">
+                    <option *ngFor="let tipo of tiposDonador" [value]="tipo.id">{{ tipo.nombre }}</option>
+                  </select>
+                </div>
+    
+  
+                <div class="form-group">
+                  <label for="">Tipo de Documento:</label>
+                  <select class="form-control" id="tipod" name="tipod" [(ngModel)] = "tipo_documento">
+                      <option *ngFor="let tipo of tipoDocumento" [value]="tipo.id">{{ tipo.nombre }}</option>
+                    </select>
+                  </div>
+              
+  
+          <div class="form-group">
+            <label for="">Nombres/Razon Social:</label>
+            <input type="text" name="nombre" id="nombre"
+                placeholder="Nombres" class="form-control"
+                [(ngModel)]="nombreInput">
+          </div>
+  
+          <div class="form-group">
+            <label for="">Dirección:</label>
+            <input type="text" name="direccion" id="direccion"
+                placeholder="Dirección" class="form-control"
+                [(ngModel)]="direccionInput">
+          </div>
+  
+          <div class="form-group">
+            <label for="">Teléfono:</label>
+            <input type="text" name="telefono" id="telefono"
+                placeholder="Telefono" class="form-control"
+                [(ngModel)]="telefonoInput">
+          </div>
+  
+          <div class="form-group">
+            <label for="">Email:</label>
+            <input type="text" name="email" id="email"
+                placeholder="email" class="form-control"
+                [(ngModel)]="emailInput">
+          </div>
+  
+          <div class="form-group text-center">
+            <button class="btn btn-info" (click)="actualizarDonante()"> <!---->
+              Guardar
+            </button>
+          </div>
+  
+        </form>
+      </div>
+    </div>
+  </div>
+  

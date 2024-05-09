@@ -1,0 +1,9 @@
+/* app.component.css */
+
+.sidebar-hidden #wrapper {
+    grid-template-columns: 0; /* Oculta el sidebar */
+}
+
+.sidebar-hidden #content-wrapper {
+    margin-left: 0; /* Ajusta el contenido principal si el sidebar está oculto */
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Página Principal</title>
+  <!-- Estilos de Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/src/assets/sbadmin2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Estilos personalizados -->
+  <style>
+    /* Estilos personalizados */
+    /* Estilos para la sección de botones */
+    .botones {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+    /* Estilos para la sección de fotos */
+    .fotos {
+      padding: 20px;
+      text-align: center;
+    }
+    .fotos img {
+      max-width: 100%;
+      height: auto;
+    }
+    /* Estilos para la sección de información */
+    .informacion {
+      padding: 20px;
+    }
+    /* Estilos para las columnas de la sección de misión y visión */
+    .columna {
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Barra de navegación con los botones -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+       <a class="navbar-brand"> <i class="fa-solid fa-fish"></i>    Alimenta y Comparte</a>
+      <div class="d-flex">
+        <button class="btn btn-primary">Regístrate como Donador</button>
+        <button class="btn btn-success" href="/principal/cliente">Acceso Usuarios</button>
+        <!--<a  href="/principal/cliente">acceso donadores </a>-->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sección de Bienvenida e Información -->
+  <section class="informacion">
+    <h2>Bienvenido a Alimenta y Comparte</h2>
+    <p>Alimenta y Comparte es una organización comprometida con la comunidad, dedicada a proporcionar apoyo y recursos a las ollas comunes locales.
+      Nos esforzamos por abordar las necesidades alimentarias básicas de las personas en situaciones de vulnerabilidad, trabajando en colaboración con voluntarios, 
+      donantes y organizaciones asociadas para garantizar que nadie en nuestra comunidad pase hambre.</p>
+  </section>
+
+  <!-- Sección de Fotos -->
+  <section class="fotos">
+    <h2>Nuestra Galería</h2>
+    <br><br>
+    <div class="row">
+      <div class="col-sm">
+        <img src="/src/assets/img/ollacmun.jpeg" alt="Foto 1">
+      </div>
+      <div class="col-sm">
+        <img src="/src/assets/img/olla.png" alt="Foto 2">
+      </div>
+      <div class="col-sm">
+        <img src="/src/assets/img/000153241M.jpg" alt="Foto 3">
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Misión y Visión -->
+  <section class="mision-vision">
+    <h2>Nuestra Misión y Visión</h2>
+    <div class="row">
+      <div class="col">
+        <div class="columna">
+          <h3>Misión</h3>
+          <p>Nuestra misión es proporcionar alimentos nutritivos y apoyo emocional a través de ollas comunes, promoviendo la solidaridad y 
+            la dignidad humana en nuestra comunidad. Nos comprometemos a trabajar incansablemente para reducir la 
+            inseguridad alimentaria y abogar por un acceso equitativo a la alimentación para todos.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="columna">
+          <h3>Visión</h3>
+          <p>Nos visualizamos como una fuerza de cambio positivo en nuestra comunidad, donde cada individuo tenga acceso a alimentos nutritivos y 
+            se sienta apoyado por su comunidad. Nos esforzamos por construir un mundo donde la solidaridad y el cuidado mutuo sean los pilares 
+            fundamentales de nuestra sociedad, y donde la necesidad de ollas comunes sea eliminada a través de políticas inclusivas y acciones
+             colectivas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts de Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

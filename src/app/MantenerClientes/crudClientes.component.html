@@ -1,0 +1,147 @@
+<h3>{{titulo}}</h3>
+<hr>
+<form action="" class="form-horizontal">
+
+<div class="row">
+
+        <div class="form-group col-md-2">
+        <label for="">Tipo de Donador:</label>
+        <select class="form-control" id="tipo" name="tipo" [(ngModel)] = "tipo_donante"  >
+            <option value="0" disabled selected>Selecciona un tipo de donador</option>
+            <option *ngFor="let tipo of tiposDonador" [value]="tipo.id">{{ tipo.nombre }}</option>
+          </select>
+        </div>
+
+    <div class="form-group col-md-2 mt-4" >
+        <button class="btn btn-info" (click)="agregarDonante()">
+           Buscar
+        </button>
+    </div>  
+</div>
+
+
+
+
+</form>
+
+
+<form action="" class="form-horizontal">
+
+   
+
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="">Tipo de Documento:</label>
+            <select class="form-control" id="tipod" name="tipod" [(ngModel)] = "tipo_documento">
+                <option value="0" disabled selected>Selecciona tipo documento</option>
+                <option *ngFor="let tipo of tipoDocumento" [value]="tipo.id">{{ tipo.nombre }}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="">Nro documento:</label>
+                <input type="text" name="nrodocumento" id="nrodocumento"
+                    placeholder="Nro documento" class="form-control"
+                    [(ngModel)] = "nrodocumentoinput">
+            </div>   
+        
+        <div class="form-group col-md-2">
+            <label for="">Nombres/Razon Social:</label>
+            <input type="text" name="nombre" id="nombre"
+                placeholder="Nombres" class="form-control"
+                [(ngModel)] = "nombreInput">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="">Dirección:</label>
+            <input type="text" name="direccion" id="direccion"
+                placeholder="Dirección" class="form-control"
+                [(ngModel)] = "direccionInput">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="">Teléfono:</label>
+            <input type="text" name="telefono" id="telefono"
+                placeholder="Telefono" class="form-control"
+                [(ngModel)] = "telefonoInput">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="">email:</label>
+            <input type="text" name="email" id="email"
+                placeholder="email" class="form-control"
+                [(ngModel)] = "emailInput">
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <button class="btn btn-info" (click)="agregarDonante()">
+                Agregar
+            </button>
+        </div>
+    </div>
+</form>
+
+<!--
+<p *ngFor="let cliente of clienteLst; let i = index">
+    {{i+1}}, {{cliente.nombre}}, {{cliente.apellido}}, {{cliente.dni}}
+</p>
+-->
+<table datatable id="dataTable" class="table table-bordered">
+    <thead class="bg-info">
+        <tr class="text-white">
+            <th>#</th>
+            <th>Id</th>
+            <th>tipo Donador</th>
+            <th>Tipo Documento</th>
+            <th>DNI/RUC</th>
+            <th>Nombres</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let donante of donanteLst; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{donante.donante_id}}</td>
+            <td>{{donante.tipo_donante}}</td>
+            <td>{{donante.tipo_documento}}</td>
+            <td>{{donante.nro_documento}}</td>
+            <td>{{donante.nombre}}</td>
+            <td>{{donante.direccion}}</td>
+            <td>{{donante.telefono}}</td>
+            <td>{{donante.email}}</td>
+            <td>
+              <button class="btn btn-warning" (click)="openModal(donante)">
+                <span class="fa fa-edit"></span>
+              </button>
+              <button class="btn btn-primary"  >
+                <span class="fa fa-search"></span>
+              </button>
+              <button class="btn btn-danger" (click)=" eliminarDonante(donante.donante_id)">
+                <span  class="fa fa-trash"></span>
+            </button>
+            </td>
+        </tr>
+    </tbody>
+    <!--tfoot class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+        </tr>
+    </tfoot-->
+</table>
+
+
+<!--
+<p>
+    1 pepito, perez, 9849389843
+    2 lusitio, gomez, 48329043
+</p>
+-->
+
+<!-- Page level custom scripts -->
+<!--<script src="assets/sbadmin2/js/demo/datatables-demo.js"></script>-->
