@@ -37,6 +37,7 @@ export class CrudClientesComponent implements OnInit{
 
     ){}
 
+
     
 
 
@@ -132,7 +133,14 @@ export class CrudClientesComponent implements OnInit{
                         timer: 5000 //en milisegundos
                     });
               
-
+                    this.donante_id_input = 0;
+                    this.tipo_donante =  0;
+                    this.tipo_documento = 0;
+                    this.nrodocumentoinput ='';
+                    this.nombreInput  = '';
+                    this.direccionInput  ='';
+                    this.telefonoInput  = '';
+                    this.emailInput  = '';
                     this.listarDonantes();
                 },
                 (error) => {

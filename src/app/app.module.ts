@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MyModalUpdateComponent } from './my-modal-update/my-modal-update.component';
 
 
+
 //import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MyModalUpdateComponent } from './my-modal-update/my-modal-update.compon
     provideClientHydration(),
     DataService,
     DonanteService,
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+
 
   ],
   bootstrap: [AppComponent]

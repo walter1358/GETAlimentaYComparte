@@ -10,7 +10,9 @@ import path from 'path';
 
 const routes: Routes = [
 
-  { path: '', component: HomeComponentComponent },
+  { path: ' ' , component: HomeComponentComponent
+  
+  },
 
 
 
@@ -19,9 +21,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: []
   },*/
-  {
-    path: 'login',
-    component: LoginComponent,
+  { path: 'login', component: LoginComponent,
     children: [
       //{ path: 'editar', component: FormularioComponent },
       //{ path: 'ver', component: FormularioComponent }   

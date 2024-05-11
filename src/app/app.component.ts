@@ -14,6 +14,8 @@ export class AppComponent {
   isSidebarHidden: boolean = true; // O false dependiendo de tus necesidades
 
 
+ // isAuthenticated: boolean = true;
+
 
 
 }
