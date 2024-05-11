@@ -16,6 +16,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MyModalUpdateComponent } from './my-modal-update/my-modal-update.component';
+import { VacioComponent } from './vacio/vacio.component';
 
 
 
@@ -24,7 +25,7 @@ import { MyModalUpdateComponent } from './my-modal-update/my-modal-update.compon
 @NgModule({
   declarations: [
     AppComponent, CrudClientesComponent,CrudDonacionComponent, CertificacionComponent,
-    LoginComponent, HomeComponentComponent, MyModalUpdateComponent
+    LoginComponent, HomeComponentComponent, MyModalUpdateComponent, VacioComponent
   ],
   imports: [
     BrowserModule,

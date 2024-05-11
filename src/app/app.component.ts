@@ -1,6 +1,9 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { Route } from '@angular/router';
+import { Renderer2 } from '@angular/core';
+
+
 
 
 
@@ -10,22 +13,19 @@ import { Route } from '@angular/router';
   styleUrl: './app.component.css'
 })
 
-export class AppComponent  implements AfterViewInit{
+export class AppComponent {
+
+  constructor(private renderer: Renderer2) { }
+
   isSidebarHidden: boolean = true; // O false dependiendo de tus necesidades
 
 
- // isAuthenticated: boolean = true;
- @ViewChild('btnprueba', { static: true }) btnPrueba!: ElementRef;
-
- ngAfterViewInit() {
-   this.ocultarBoton();
- }
-
- ocultarBoton() { 
-   // Oculta el botón
-   this.btnPrueba.nativeElement.style.display = 'none';
- }
-
-
+  ngAfterViewInit() {
+    const button = document.getElementById('accordionSidebar');
+    if (button) {
+      this.renderer.setStyle(button, 'display', 'none');
+    }
+  } 
+  
 
 }

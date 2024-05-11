@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { Donante } from '../MantenerClientes/donante.model';
 import { DonanteService } from '../MantenerClientes/donante.service';
 import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
+
 
 
 
@@ -14,6 +16,10 @@ import { AppComponent } from '../app.component';
   styleUrl: './home.component.component.css'
 })
 export class HomeComponentComponent {
+
+  constructor(
+    private donanteService : DonanteService, private elRef: ElementRef, private renderer: Renderer2, private router: Router){}
+
   donanteLst: Donante[] = [];
 
   titulo: string = 'MANTENIMIENTO DE DONANTES';
@@ -27,9 +33,7 @@ export class HomeComponentComponent {
   telefonoInput: string = '';
   emailInput: string = '';
   
-  constructor(
-      private donanteService : DonanteService, private elRef: ElementRef, private renderer: Renderer2,
-      private componente: AppComponent){}
+
 
       isPanelOpen: boolean = false;
 
@@ -43,14 +47,16 @@ export class HomeComponentComponent {
         this.componente.isAuthenticated = false;
       }*/
 
-      abrirsms(){
-        Swal.fire({
-          icon:'warning',
-          title:'Hay campos vacíos',
-          text: 'Complete los campos solicitados',
-          showCloseButton: true,
-      })
+      mostrarBoton() {
+        const button = document.getElementById('accordionSidebar');
+        if (button) {
+          this.renderer.setStyle(button, 'display', 'block'); // o 'inline', según corresponda
+        }
+
+        this.router.navigate(['/vacio'])
+
       }
+      
     
       
 
