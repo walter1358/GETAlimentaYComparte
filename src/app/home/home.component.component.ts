@@ -41,7 +41,41 @@ export class HomeComponentComponent {
     telefonoInput: string = '';
     emailInput: string = '';
 
- 
+    enviarMensaje() {
+
+  
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + btoa(`${usuario}:${contraseña}`)
+      });
+  
+      const body = new URLSearchParams();
+      body.set('To', '+51962303062');
+      body.set('From', '+13253123628');
+      //body.set('Body', 'Gracias por su registro, bienvenido a Alimenta y Comparte ,Su usurio es: donante, pass: 1234');
+      const mensaje = 'Gracias por su registro, bienvenido a Alimenta y Comparte.\nSu usuario es: donante\nPass: 1234';
+      body.set('Body', mensaje);
+
+  
+      this.http.post(url, body.toString(), { headers: headers })
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            console.error('Ocurrió un error:', error);
+            console.error('Nombre del error:', error.name);
+            console.error('Mensaje del error:', error.message);
+            console.error('Código de estado HTTP:', error.status);
+            console.error('Cuerpo del error:', error.error);
+            return throwError(error); // Propaga el error
+          })
+        )
+        .subscribe(
+          response => {
+            console.log('Mensaje enviado correctamente:', response);
+            // Maneja la respuesta según tus necesidades
+          }
+        );
+    }
+
 
   
 
