@@ -10,10 +10,13 @@ import path from 'path';
 
 const routes: Routes = [
 
-  { path: ' ' , component: HomeComponentComponent
+  { path: '' , component: HomeComponentComponent,
+  children: [
+    //{ path: 'editar', component: FormularioComponent },
+    //{ path: 'ver', component: FormularioComponent }   
+  ]
   
   },
-
 
 
   /*{

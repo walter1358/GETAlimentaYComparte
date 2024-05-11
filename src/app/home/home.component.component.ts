@@ -42,7 +42,17 @@ export class HomeComponentComponent {
       logout() {
         this.componente.isAuthenticated = false;
       }*/
+
+      abrirsms(){
+        Swal.fire({
+          icon:'warning',
+          title:'Hay campos vacíos',
+          text: 'Complete los campos solicitados',
+          showCloseButton: true,
+      })
+      }
     
+      
 
       tiposDonador: { id: number, nombre: string }[] = [
         { id: 1, nombre: 'Persona natural' },
