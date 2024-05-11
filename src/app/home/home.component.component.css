@@ -1,0 +1,24 @@
+/* styles.css */
+/*
+section {
+    text-align: center;
+    border: 2px solid #000;
+    padding: 20px;
+  }
+  
+  .col-sm {
+    display: inline-block;
+    margin: 10px;
+  }
+  */
+
+
+  .custom-box {
+    border: 1px solid #ccc; /* Bordes */
+    background-color: #fff; /* Fondo blanco */
+    padding: 20px; /* Espaciado interno */
+    height: 200px;
+    display: flex;
+    align-items: center;
+  }
+  

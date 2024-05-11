@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit ,  ElementRef, Renderer2 } from "@angular/core";
 import { Donante } from "./donante.model";
 import Swal from "sweetalert2";
 import { DonanteService } from "./donante.service";
@@ -33,10 +33,18 @@ export class CrudClientesComponent implements OnInit{
 
     constructor(
         private donanteService : DonanteService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private elRef: ElementRef, private renderer: Renderer2
 
     ){}
 
+    ngAfterViewInit() {
+        const button = document.getElementById('accordionSidebar');
+        if (button) {
+          this.renderer.setStyle(button, 'display', 'block');
+        }
+      } 
+      
     
 
 
@@ -132,7 +140,14 @@ export class CrudClientesComponent implements OnInit{
                         timer: 5000 //en milisegundos
                     });
               
-
+                    this.donante_id_input = 0;
+                    this.tipo_donante =  0;
+                    this.tipo_documento = 0;
+                    this.nrodocumentoinput ='';
+                    this.nombreInput  = '';
+                    this.direccionInput  ='';
+                    this.telefonoInput  = '';
+                    this.emailInput  = '';
                     this.listarDonantes();
                 },
                 (error) => {

@@ -5,13 +5,26 @@ import { CrudDonacionComponent } from './GestionDonaciones/crudDonaciones.compon
 import { LoginComponent } from './Login/login/login.component';
 import { HomeComponentComponent } from './home/home.component.component';
 import path from 'path';
+import { VacioComponent } from './vacio/vacio.component';
 
 
 
 const routes: Routes = [
 
-  { path: '', component: HomeComponentComponent },
+  { path: '' , component: HomeComponentComponent,
+  children: [
+    //{ path: 'editar', component: FormularioComponent },
+    //{ path: 'ver', component: FormularioComponent }   
+  ]
+  
+  },
 
+  {path: 'vacio' , component: VacioComponent,
+    children: [
+    //{ path: 'editar', component: FormularioComponent },
+    //{ path: 'ver', component: FormularioComponent } 
+    ]
+  },
 
 
   /*{
@@ -19,9 +32,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: []
   },*/
-  {
-    path: 'login',
-    component: LoginComponent,
+  { path: 'login', component: LoginComponent,
     children: [
       //{ path: 'editar', component: FormularioComponent },
       //{ path: 'ver', component: FormularioComponent }   

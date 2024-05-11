@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit ,  ElementRef, Renderer2 } from "@angular/core";
 import { Donacion } from "./donacion.model";
 //import { Cliente } from "./cliente.model";
 import Swal from "sweetalert2";
@@ -18,6 +18,18 @@ export class CrudDonacionComponent implements OnInit{
     cantidadInput: string ='';
     unidadmedidaInput: string = '';
     fechacaducidadInput: string = '';
+
+    constructor( private elRef: ElementRef, private renderer: Renderer2){}
+
+    ngAfterViewInit() {
+        const button = document.getElementById('accordionSidebar');
+        if (button) {
+          this.renderer.setStyle(button, 'display', 'block');
+        }
+      } 
+
+
+
 
 
     //Ejemplo de añadir js directamente
