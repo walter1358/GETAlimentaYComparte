@@ -43,8 +43,8 @@ export class HomeComponentComponent {
 
     enviarMensaje() {
       const url = 'https://api.twilio.com/2010-04-01/Accounts/ACb4b8a6604a46ff1a14b0e66fb6415c5c/Messages.json';
-      const usuario = 'ACb4b8a6604a46ff1a14b0e66fb6415c5c';
-      const contraseña = '5eaf97999f755b86a5201885d082f9eb';
+     // const usuario = 'ACb4b8a6604a46ff1a14b0e66fb6415c5c';
+     /// const contraseña = '5eaf97999f755b86a5201885d082f9eb';
   
       const headers = new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
