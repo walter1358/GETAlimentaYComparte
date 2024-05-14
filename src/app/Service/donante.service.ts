@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { DataService } from '../data.service';
-import { Donante } from './donante.model';
+import { DataService } from './data.service';
+import { Donante } from '../model/donante.model';
 import { runInThisContext } from 'vm';
 
 @Injectable()
@@ -15,6 +15,11 @@ export class DonanteService {
     return this.dataServide.filtraDonantesporId(codigo);
   }
 
+  buscarPorEmail(email:string)
+  {
+    return this.dataServide.filtrarPorMail(email);
+  }
+
   agregarDonantes(donante: Donante){
     return this.dataServide.guardarDonante(donante)
   }
@@ -26,5 +31,8 @@ export class DonanteService {
   deleteDonante(codigo: number){
     return this.dataServide.eliminarDonante(codigo)
   }
+
+
+
 
 }

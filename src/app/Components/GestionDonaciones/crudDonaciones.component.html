@@ -1,0 +1,125 @@
+<h3>{{titulo}}</h3>
+<hr>
+<form action="" class="form-horizontal">
+
+    <!-- <div class="row">
+        <div class="form-group col-md-2">
+            <button class="btn btn-primary" (click)="agregarDonacion()">
+               Buscar
+            </button>
+        </div>
+    </div>
+    
+    <div class="form-group col-md-2">
+        <label for="">Tipo de Donador:</label>
+        <input type="text" name="tipo" id="tipo"
+            placeholder="DNI/RUC" class="form-control">
+              
+    </div> -->
+
+    <div class="row">
+        <div class="form-group col-md-5">
+            <label for="">Donante Id</label>
+            <input type="text" name="donanteId" id="donanteId"
+                placeholder="donanteId" class="form-control" [(ngModel)] = "datosDonante"  disabled="">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="fecha">Fecha de entrega:</label>
+            <input type="date" id="fecha" name="fecha" class="form-control" placeholder="yyyy/mm/dd">
+        </div>
+        
+    </div>
+
+
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="">Producto:</label>
+            <input type="text" name="producto" id="producto"
+                placeholder="producto" class="form-control"
+                [(ngModel)] = "productoInput">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="">Cantidad:</label>
+            <input type="text" name="cantidad" id="cantidad"
+                placeholder="Cantidad" class="form-control"
+                [(ngModel)] = "cantidadInput">
+        </div>
+              <div class="form-group  col-md-2">
+                <label for="unidadMedida" class="form-label">Selecciona una unidad de medida:</label>
+                <select id="unidadMedida" name="unidadMedida" class="form-control" [(ngModel)]="unidadmedidaInput">
+                  <option value="1">Saco de 25 kilogramos</option>
+                  <option value="2">Saco de 50 kilogramos</option>
+                  <option value="3">Bolsa de 1 kilogramo</option>
+                  <option value="4">Bolsa de 500 gramos</option>
+                  <option value="5">Lata</option>
+                  <option value="6">Paquete</option>
+                  <option value="7">Botella</option>
+                  <option value="8">Caja</option>
+                  <option value="9">Barril</option>
+                  <option value="10">Pieza</option>
+                  <option value="11">Docena</option>
+                </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="">Fecha Caducidad:</label>
+            <input type="date"  name="fechacaducidad" id="fechacaducidad"
+            placeholder="Fecha de Caducidad" class="form-control"
+            [(ngModel)] = "fechaCaducidadInput" placeholder="yyyy/mm/dd">
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="form-group col-md-1">
+            <button class="btn btn-info" (click)="agregarDetalle()">
+                Agregar
+            </button>
+        </div>
+        <div class="form-group col-md-1">
+            <button class="btn btn-info" (click)="guardarDonacionYDetalle()">
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+<!--
+<p *ngFor="let cliente of clienteLst; let i = index">
+    {{i+1}}, {{cliente.nombre}}, {{cliente.apellido}}, {{cliente.dni}}
+</p>
+-->
+<table datatable id="dataTable" class="table table-bordered">
+    <thead class="bg-info">
+        <tr class="text-white">
+            <th>#</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Unidad medida</th>
+            <th>Fecha Caducidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let detalle of detalleDonacion_Lst; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{detalle.producto}}</td>
+            <td>{{detalle.cantidad}}</td>
+            <td>{{detalle.unidad_medida }}</td>
+            <td>{{detalle.fecha_cad}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="eliminarDetalle(i)">
+                <span  class="fa fa-trash"></span>
+            </button>
+            </td>
+        </tr>
+    </tbody>
+    <!--tfoot class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+        </tr>
+    </tfoot-->
+</table>
+
+

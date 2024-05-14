@@ -1,22 +1,26 @@
-import { Component, OnInit ,  ElementRef, Renderer2 } from "@angular/core";
-import { Donante } from "./donante.model";
+import { Component, OnInit ,  ElementRef, Renderer2, Inject } from "@angular/core";
+import { Donante } from "../../model/donante.model";
 import Swal from "sweetalert2";
-import { DonanteService } from "./donante.service";
+import { DonanteService } from "../../Service/donante.service";
 import { response } from "express";
 import { error } from "console";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
 import { MyModalUpdateComponent } from "../my-modal-update/my-modal-update.component";
+import { AppComponent } from '../../app.component';
+import { DOCUMENT } from "@angular/common";
+import { share } from "rxjs";
 
 
 
 
-
+ 
 @Component({
-    selector: 'crudClientes-root',
-    templateUrl: './crudClientes.component.html',
-    styleUrls: ['./crudClientes.component.css']
+    selector: 'crudDonantes-root',
+    templateUrl: './crudDonantes.component.html',
+    styleUrls: ['./crudDonantes.component.css']
 })
-export class CrudClientesComponent implements OnInit{
+
+export class CrudDonantesComponent implements OnInit{
     donanteLst: Donante[] = [];
 
     titulo: string = 'MANTENIMIENTO DE DONANTES';
@@ -34,15 +38,24 @@ export class CrudClientesComponent implements OnInit{
     constructor(
         private donanteService : DonanteService,
         public dialog: MatDialog,
-        private elRef: ElementRef, private renderer: Renderer2
+        private elRef: ElementRef, 
+        private renderer: Renderer2,
+        private miComponente:AppComponent,
+        @Inject (DOCUMENT) private document: Document,
 
-    ){}
+    ){
+        this.listarDonantes();
+        
+    }
 
     ngAfterViewInit() {
-        const button = document.getElementById('accordionSidebar');
+        const button = this.document.getElementById('accordionSidebar');
         if (button) {
           this.renderer.setStyle(button, 'display', 'block');
         }
+
+        this.miComponente.menuAnalista();
+        
       } 
       
     
@@ -50,14 +63,14 @@ export class CrudClientesComponent implements OnInit{
 
     //Ejemplo de añadir js directamente
     ngOnInit(){
-
-        this.listarDonantes();
-        let body = document.body;
-        let script = document.createElement('script');
+        let body = this.document.body;
+        let script = this.document.createElement('script');
         script.innerHTML = '';
         script.src = 'assets/sbadmin2/js/demo/datatables-demo.js';
         script.async = true;
-        body.appendChild(script);
+       // body.appendChild(script);
+        this.renderer.appendChild(body,script)
+
     }
 
     

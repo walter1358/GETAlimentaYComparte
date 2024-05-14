@@ -74,18 +74,30 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <!-- <h6 class="collapse-header">Gestion de Donación:</h6> -->
-                            <div class="collapse-divider"></div>
+
+                            <ng-template id="item_donante">
+                                <div class="collapse-divider" ></div>
                             <h6 class="collapse-header">-Gest. Donante:</h6>
                                 <a class="collapse-item" href="/clientes">--Donante</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">-Gest. de Donación:</h6>
+                            </ng-template>
+
+                            
+
+                            <ng-template id="item_donacion">
+                                <div class="collapse-divider"></div>
+                            <h6 class="collapse-header" >-Gest. de Donación:</h6>
                                 <a class="collapse-item" href="/donaciones">--Alimentos</a>
-                                <a class="collapse-item" href="/proveedores">--Monetario</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">-Gest. Admin.:</h6>
-                                    <a class="collapse-item" href="/clientes">--Mantenimiento Usuarios</a>
-                                    <a class="collapse-item" href="/proveedores">--Validar Donación</a>
-                                    <a class="collapse-item" href="/proveedores">--Certificado de Donación</a>
+                                <a class="collapse-item" href="/donaDinero">--Monetario</a>                            
+                            </ng-template>
+
+                            <ng-template id="item-adminstracion">
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">-Gest. Admin.:</h6>
+                                        <a class="collapse-item" href="/clientes">--Mantenimiento Usuarios</a>
+                                        <a class="collapse-item" href="/proveedores">--Validar Donación</a>
+                                        <a class="collapse-item" href="/proveedores">--Certificado de Donación</a>
+                            </ng-template>
+
                         </div>
     
                     </div>
@@ -392,6 +404,9 @@
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
+                        <div class="copyright text-right my-auto">
+                            <span> </span>
+                        </div>
                         <div class="copyright text-center my-auto">
                             <span>Copyright &copy; Your Website 2020</span>
                         </div>

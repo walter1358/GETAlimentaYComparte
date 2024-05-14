@@ -1,15 +1,21 @@
-import { Component,  ElementRef, Renderer2 } from '@angular/core';
+import { Component,  ElementRef, Renderer2, Inject,OnInit} from '@angular/core';
 import { Resend } from 'resend';
 import Swal from 'sweetalert2';
-import { Donante } from '../MantenerClientes/donante.model';
-import { DonanteService } from '../MantenerClientes/donante.service';
-import { AppComponent } from '../app.component';
+import { Donante } from '../../model/donante.model';
+import { AppComponent } from '../../app.component';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
+import { DOCUMENT } from "@angular/common";
+import { DonanteService } from '../../Service/donante.service';
 
 
 
+
+
+const url = 'https://api.twilio.com/2010-04-01/Accounts/ACb4b8a6604a46ff1a14b0e66fb6415c5c/Messages.json';
+const usuario =  'ACb4b8a6604a46ff1a14b0e66fb6415c5c';
+const contraseña = '5eaf97999f755b86a5201885d082f9eb';
 
 
 
@@ -18,11 +24,13 @@ import { catchError, throwError } from 'rxjs';
   templateUrl: './home.component.component.html',
   styleUrl: './home.component.component.css'
 })
-export class HomeComponentComponent {
+export class HomeComponentComponent  implements OnInit{
 
   constructor(
     private donanteService : DonanteService, private elRef: ElementRef, private renderer: Renderer2, private router: Router,
-    private http: HttpClient){}
+    private http: HttpClient, private miComponente:AppComponent,
+    @Inject (DOCUMENT) private document: Document,
+  ){}
 
     toNumber: string = '+51962303062';
     message: string = 'Gracias por su registro, bienvenido a Alimenta y Comparte';
@@ -40,6 +48,14 @@ export class HomeComponentComponent {
     direccionInput: string ='';
     telefonoInput: string = '';
     emailInput: string = '';
+
+  ngOnInit(): void {
+    sessionStorage.clear()
+    this.miComponente.correo = ''
+    this.miComponente.dato = ''
+  }
+
+  
 
     enviarMensaje() {
 
@@ -91,18 +107,44 @@ export class HomeComponentComponent {
       logout() {
         this.componente.isAuthenticated = false;
       }*/
-
+ 
       mostrarBoton() {
+
+        /*
         const button = document.getElementById('accordionSidebar');
         if (button) {
           this.renderer.setStyle(button, 'display', 'block'); // o 'inline', según corresponda
         }
+        */
 
-        this.router.navigate(['/vacio'])
+        //this.router.navigate(['/vacio'])
+        this.router.navigate(['login'])
+        this.miComponente.menuDonante();
+        sessionStorage.setItem('tipo','Donante');
+       // this.miComponente.dato = sessionStorage.getItem('tipo')    // 'Donante'
+        //this.miComponente.correo =  sessionStorage.getItem('mail')
 
+        //localStorage.setItem('userType', 'Donante');
       }
       
-    
+      accesoAnalista(){
+        /*
+        const button = document.getElementById('accordionSidebar');
+        if (button) {
+          this.renderer.setStyle(button, 'display', 'block'); // o 'inline', según corresponda
+        }
+        */
+
+        //this.router.navigate(['/vacio'])
+        this.router.navigate(['login'])
+        this.miComponente.menuAnalista();
+        sessionStorage.setItem('tipo','Analista');
+
+        //this.miComponente.dato = ''
+        //localStorage.setItem('userType', 'Analista');
+
+
+      }
       
 
       tiposDonador: { id: number, nombre: string }[] = [
