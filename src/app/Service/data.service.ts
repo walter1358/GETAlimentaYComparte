@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Donante } from '../model/donante.model';
 import { text } from 'express';
 import { strict } from 'assert';
+import { Donacion } from '../model/donacion.model';
+import { DetalleDonacion } from '../model/detalleDonacion.model';
 
 
 //comentario
@@ -16,6 +18,11 @@ export class DataService {
     return this.httpClient.get("http://localhost:8080/api/donantes")
   }
 
+  cargarDonaciones(){
+    return this.httpClient.get("http://localhost:8080/api/donaciones")
+  }
+
+  
   filtraDonantesporId(codigo : number){
     let url:string
     url = 'http://localhost:8080/api/donantes/' + codigo;
@@ -29,7 +36,6 @@ export class DataService {
 
   }
 
-
   modificarDonante(donante:Donante){
       return this.httpClient.put(" http://localhost:8080/api/donantesupt",donante);
   }
@@ -37,6 +43,16 @@ export class DataService {
   guardarDonante(donante: Donante){
     return this.httpClient.post("http://localhost:8080/api/donantes", donante)
   }
+
+  guardarDonacionOutId(donacion:Donacion){
+    return this.httpClient.post("http://localhost:8080/api/donacionesout", donacion)
+  }
+
+  guardaDetalleDonacion(detalleDonacion: DetalleDonacion){
+    return this.httpClient.post("http://localhost:8080/api/donaciondet", detalleDonacion)
+
+  }
+
 
   eliminarDonante(codigo: number){
     let url: string;
