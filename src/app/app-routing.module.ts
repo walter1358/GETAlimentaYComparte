@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CrudClientesComponent } from './MantenerClientes/crudClientes.component';
-import { CrudDonacionComponent } from './GestionDonaciones/crudDonaciones.component';
-import { LoginComponent } from './Login/login/login.component';
-import { HomeComponentComponent } from './home/home.component.component';
+import { CrudDonantesComponent } from './Components/MantenerDonantes/crudDonantes.component';
+import { CrudDonacionComponent } from './Components/GestionDonaciones/crudDonaciones.component';
+import { LoginComponent } from './Components/Login/login.component';
+import { HomeComponentComponent } from './Components/home/home.component.component';
 import path from 'path';
-import { VacioComponent } from './vacio/vacio.component';
+import { VacioComponent } from './Components/vacio/vacio.component';
+import { ComponentDonaDineroComponent } from './Components/component-dona-dinero/component-dona-dinero.component';
 
 
 
@@ -41,7 +42,7 @@ const routes: Routes = [
   
   {
     path: 'clientes',
-    component: CrudClientesComponent,
+    component: CrudDonantesComponent,
     children: [
       //{ path: 'editar', component: FormularioComponent },
       //{ path: 'ver', component: FormularioComponent }
@@ -54,7 +55,19 @@ const routes: Routes = [
       //{ path: 'editar', component: FormularioComponent },
       //{ path: 'ver', component: FormularioComponent }
     ]
+  },
+
+  {
+    path: 'donaDinero',
+    component: ComponentDonaDineroComponent,
+    children:[
+            //{ path: 'editar', component: FormularioComponent },
+      //{ path: 'ver', component: FormularioComponent }
+    ]
   }
+
+
+
 ];
 
 @NgModule({

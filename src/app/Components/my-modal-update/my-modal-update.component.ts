@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA , MatDialogRef} from '@angular/material/dialog';
 import { Donante } from '../../model/donante.model';
 import { DonanteService } from '../../Service/donante.service';
 import Swal from 'sweetalert2';
-import { CrudClientesComponent } from '../MantenerDonantes/crudDonantes.component';
+import { CrudDonantesComponent } from '../MantenerDonantes/crudDonantes.component';
 import { DialogRef } from '@angular/cdk/dialog';
 
 

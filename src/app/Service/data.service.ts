@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Donante } from './MantenerClientes/donante.model';
+import { Donante } from '../model/donante.model';
+import { text } from 'express';
+import { strict } from 'assert';
 
 
 //comentario
@@ -20,6 +22,13 @@ export class DataService {
     return this.httpClient.get(url)
   }
 
+  filtrarPorMail(email:string){
+    let url:string
+    url = 'http://localhost:8080/api/donantes/email/' + email;
+    return this.httpClient.get(url)
+
+  }
+
 
   modificarDonante(donante:Donante){
       return this.httpClient.put(" http://localhost:8080/api/donantesupt",donante);
@@ -35,6 +44,7 @@ export class DataService {
     return this.httpClient.delete(url);
 
   }
+
 
 
 }
