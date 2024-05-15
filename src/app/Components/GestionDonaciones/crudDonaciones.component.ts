@@ -15,6 +15,8 @@ import DataTable from "datatables.net-dt";
 import DataTables from "datatables.net";
 import { Data } from "@angular/router";
 import { DataTablesModule } from "angular-datatables";
+import { DonaciondetalleService } from "../../Service/donaciondetalle.service";
+import { error } from "node:console";
 
 
 @Component({
@@ -43,7 +45,7 @@ export class CrudDonacionComponent implements OnInit{
     cantidadInput: number = 0;
     monedaInput: string = '';
     bancoOrigen: string = '';
-    fechaEntregaInput: string = '';
+    fechaEntregaInput: Date = new Date();
     estadoInput = 1;
     comprobante =  'imagen.jpg';    
     donanteIdInput: number = 0;
@@ -55,7 +57,8 @@ export class CrudDonacionComponent implements OnInit{
     productoInput: string = '';
     cantDetalleInput: number = 0;
     unidadmedidaInput: number = 0;
-    FecCaduInput: string = '';
+    //FecCaduInput: string = '';}
+    FecCaduInput: Date = new Date();
 
     
 
@@ -63,6 +66,7 @@ export class CrudDonacionComponent implements OnInit{
     private donacionService: DonacionService,
     private miComponente:AppComponent,
     private donanteService: DonanteService,
+    private donacionDetalleS : DonaciondetalleService,
     @Inject (DOCUMENT) private _document: Document,
     private authService: AuthService
     ){
@@ -116,8 +120,7 @@ export class CrudDonacionComponent implements OnInit{
 
     agregarDetalle(){
 
-      if(this.productoInput === '' || this.cantidadInput ===  0 || this.unidadmedidaInput === 0
-          || this.FecCaduInput === ''
+      if(this.productoInput === '' || this.cantidadInput ===  0 || this.unidadmedidaInput === 0      
        ){
           Swal.fire({
               icon:'warning',
@@ -133,7 +136,7 @@ export class CrudDonacionComponent implements OnInit{
           this.productoInput =  '';
           this.cantidadInput = 0;
           this.unidadmedidaInput =0;
-          this.FecCaduInput  = '';
+          this.FecCaduInput  = new Date();
           Swal.fire({
             icon:'info',
             title:'Inserción de productos ',
@@ -185,7 +188,7 @@ export class CrudDonacionComponent implements OnInit{
 
     agregarDonante(){
           console.log(' donante_id ', this.donanteIdInput)
-          let donacion = new Donacion(0, this.tipoInput, this.cantidadInput, this.monedaInput, this.bancoOrigen, this.fechaEntregaInput, this.estadoInput, this.comprobante ,24)
+          let donacion = new Donacion(0, this.tipoInput, this.cantidadInput, this.monedaInput, this.bancoOrigen, this.fechaEntregaInput, this.estadoInput, this.comprobante ,this.donanteIdInput)
           //this.donanteLst.push(donant);
          // console.log(donacion);
           this.donacionService.ObtenerIdDonante(donacion)
@@ -202,6 +205,17 @@ export class CrudDonacionComponent implements OnInit{
 
                 console.log('se guardo??: ', this.detalleDonacion_Lst)
 
+                this.detalleDonacion_Lst.forEach(detalle =>{
+                  this.donacionDetalleS.agregarDetalleDonacion(detalle).subscribe(
+                    (response) => {
+                      console.log("Detalle de donación insertado correctamente:", response);
+                    },
+                    (error) => {
+                      console.log("Detalle de donación insertado correctamente:", response);
+                    }
+                  )
+                })
+
 
            ;
 
@@ -215,7 +229,7 @@ export class CrudDonacionComponent implements OnInit{
                       timer: 5000 //en milisegundos
                   });
             
-                  this.FecCaduInput = '';
+                  //this.FecCaduInput = new Date();
                   this.listarDonaciones();
 
                  // this.listarDonantes();

@@ -80,7 +80,7 @@
             </button>
         </div>
         <div class="form-group col-md-2">
-            <button class="btn btn-info" data-toggle="modal" data-target="#updateModal">
+            <button class="btn btn-info" data-toggle="modal" data-target="#donacionesModal">
                 ver mis donaciones
             </button>
         </div>
@@ -95,6 +95,7 @@
                 <th>Cantidad</th>
                 <th>Unidad medida</th>
                 <th>Fecha Caducidad</th>
+                <th>acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -106,15 +107,15 @@
                 <td>{{detalle.fecha_cad}}</td>
                 <td>
                   <button class="btn btn-danger" (click)="eliminarDetalle(i)">
-                    <span  class="fa fa-trash"></span>
+                    <span  class="fa fa-trash" data-toggle="modal" data-target="#donacionesModal"></span>
                 </button>
                 </td>
             </tr>
         </tbody>
     </table>
 
-<!-- Modal Actualizar -->
-<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal ver donaciones -->
+<div class="modal fade" id="donacionesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header">
@@ -124,7 +125,8 @@
             </button>
         </div>
         <div class="modal-body">
-            <table datatable id="dataTable2"  class="table table-bordered">
+            
+                            <table datatable id="dataTable2"  class="table table-bordered">
                 <thead class="bg-info">
                     <tr class="text-white">
                         <th>#</th>
@@ -140,16 +142,17 @@
                         <td>{{i+1}}</td>
                         <td>{{donacion.donacion_id}}</td>
                         <td>{{donacion.tipo}}</td>
-                        <td>{{donacion.fecha_entrega }}</td>
+                        <td>{{donacion.fecha_entrega  | date: 'yyyy/MM/dd' }}</td>
                         <td>{{donacion.estado}}</td>
                         <td>
-                          <button class="btn btn-info">
-                            <span  class="fa fa-search"></span>
+                          <button class="btn btn-info" data-toggle="modal" data-target="#detalleModal">
+                            <span  class="fa fa-search" ></span>
                         </button>
                         </td>
                     </tr>
                 </tbody>
         </table>
+            
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -160,7 +163,52 @@
 
 
 
+<!-- Modal detalleDonaciones -->
+<div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ver mis donaciones: </h5>
+            <button id="updateModal-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!--
+                            <table datatable id="dataTable2"  class="table table-bordered">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th>#</th>
+                        <th>Donacion ID</th>
+                        <th>Tipo</th>
+                        <th>Fecha Entrega</th>
+                        <th>Estado</th>
+                        <th>acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let donacion of donacion_Lst; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{donacion.donacion_id}}</td>
+                        <td>{{donacion.tipo}}</td>
+                        <td>{{donacion.fecha_entrega  | date: 'yyyy/MM/dd' }}</td>
+                        <td>{{donacion.estado}}</td>
+                        <td>
+                          <button class="btn btn-info">
+                            <span  class="fa fa-search"></span>
+                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+            -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
 
-    
     
 
