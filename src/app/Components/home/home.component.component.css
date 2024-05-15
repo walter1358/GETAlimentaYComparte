@@ -22,3 +22,24 @@ section {
     align-items: center;
   }
   
+  .container2 {
+    width: 500px; /* Ancho fijo del contenedor */
+    overflow: hidden; /* Para ocultar cualquier contenido que se salga del contenedor */
+    position: relative; /* Para usar posiciones absolutas dentro del contenedor */
+  }
+  
+  #movingImage {
+    position: absolute; /* Para mover la imagen dentro del contenedor */
+    left: 0; /* Inicialmente, la imagen comienza en el lado izquierdo del contenedor */
+    animation: moveImage 5s infinite alternate; /* Animación para mover la imagen */
+  }
+  
+  @keyframes moveImage {
+    0% {
+      left: 0; /* La imagen comienza en el lado izquierdo */
+    }
+    100% {
+      left: calc(100% - 1000px); /* La imagen se mueve hacia la derecha hasta el límite del contenedor */
+    }
+  }
+  
