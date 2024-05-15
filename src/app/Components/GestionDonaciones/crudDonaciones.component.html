@@ -25,7 +25,7 @@
         </div>
         <div class="form-group col-md-2">
             <label for="fecha">Fecha de entrega:</label>
-            <input type="date" id="fecha" name="fecha" class="form-control" placeholder="yyyy/mm/dd">
+            <input type="date" id="fechaE" name="fechaE" class="form-control" [(ngModel)] = "fechaEntregaInput">
         </div>
         
     </div>
@@ -64,7 +64,7 @@
             <label for="">Fecha Caducidad:</label>
             <input type="date"  name="fechacaducidad" id="fechacaducidad"
             placeholder="Fecha de Caducidad" class="form-control"
-            [(ngModel)] = "fechaCaducidadInput" placeholder="yyyy/mm/dd">
+            [(ngModel)] = "FecCaduInput" placeholder="yyyy/mm/dd">
         </div>
         
     </div>
@@ -75,51 +75,92 @@
             </button>
         </div>
         <div class="form-group col-md-1">
-            <button class="btn btn-info" (click)="guardarDonacionYDetalle()">
+            <button class="btn btn-info" (click)="agregarDonante()">
                 Guardar
+            </button>
+        </div>
+        <div class="form-group col-md-2">
+            <button class="btn btn-info" data-toggle="modal" data-target="#updateModal">
+                ver mis donaciones
             </button>
         </div>
     </div>
 </form>
 
-<!--
-<p *ngFor="let cliente of clienteLst; let i = index">
-    {{i+1}}, {{cliente.nombre}}, {{cliente.apellido}}, {{cliente.dni}}
-</p>
--->
-<table datatable id="dataTable" class="table table-bordered">
-    <thead class="bg-info">
-        <tr class="text-white">
-            <th>#</th>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Unidad medida</th>
-            <th>Fecha Caducidad</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let detalle of detalleDonacion_Lst; let i = index">
-            <td>{{i+1}}</td>
-            <td>{{detalle.producto}}</td>
-            <td>{{detalle.cantidad}}</td>
-            <td>{{detalle.unidad_medida }}</td>
-            <td>{{detalle.fecha_cad}}</td>
-            <td>
-              <button class="btn btn-danger" (click)="eliminarDetalle(i)">
-                <span  class="fa fa-trash"></span>
-            </button>
-            </td>
-        </tr>
-    </tbody>
-    <!--tfoot class="thead-dark">
-        <tr>
-            <th>#</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>DNI</th>
-            <th>Acciones</th>
-        </tr>
-    </tfoot-->
-</table>
+    <table datatable id="dataTable" class="table table-bordered">
+        <thead class="bg-info">
+            <tr class="text-white">
+                <th>#</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Unidad medida</th>
+                <th>Fecha Caducidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let detalle of detalleDonacion_Lst; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{detalle.producto}}</td>
+                <td>{{detalle.cantidad}}</td>
+                <td>{{detalle.unidad_medida }}</td>
+                <td>{{detalle.fecha_cad}}</td>
+                <td>
+                  <button class="btn btn-danger" (click)="eliminarDetalle(i)">
+                    <span  class="fa fa-trash"></span>
+                </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
+<!-- Modal Actualizar -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ver mis donaciones: </h5>
+            <button id="updateModal-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <table datatable id="dataTable2"  class="table table-bordered">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th>#</th>
+                        <th>Donacion ID</th>
+                        <th>Tipo</th>
+                        <th>Fecha Entrega</th>
+                        <th>Estado</th>
+                        <th>acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let donacion of donacion_Lst; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{donacion.donacion_id}}</td>
+                        <td>{{donacion.tipo}}</td>
+                        <td>{{donacion.fecha_entrega }}</td>
+                        <td>{{donacion.estado}}</td>
+                        <td>
+                          <button class="btn btn-info">
+                            <span  class="fa fa-search"></span>
+                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    
+    
 

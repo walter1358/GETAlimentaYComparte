@@ -11,6 +11,10 @@ import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { DetalleDonacion } from "../../model/detalleDonacion.model";
 import { DonacionService } from "../../Service/donacion.service";
+import DataTable from "datatables.net-dt";
+import DataTables from "datatables.net";
+import { Data } from "@angular/router";
+import { DataTablesModule } from "angular-datatables";
 
 
 @Component({
@@ -26,29 +30,44 @@ export class CrudDonacionComponent implements OnInit{
 
     titulo: string = 'GESTION DE DONACIONES DE ALIMENTOS';
 
-    //Donantes
-    donanteIdInput: number = 0;
-    donanteMailInput : string  ='a' ;
-    donanteNombreInput : string = 'a';
-    datosDonante: string = 'a';
-    documentoDonanteI : string = 'a';
+    //Donante
+    donanteMailInput : string  ='' ;
+    donanteNombreInput : string = '';
+    datosDonante: string = '';
+    documentoDonanteI : string = '';
+    nrodocumento: string='';
 
     //Donaciones
-    fechaEntregaInput: string = '2024/08/20';
-    nrodocumento: string='12345678';
+    donacionIdInput: number = 0;
+    tipoInput = 1;
+    cantidadInput: number = 0;
+    monedaInput: string = '';
+    bancoOrigen: string = '';
+    fechaEntregaInput: string = '';
+    estadoInput = 1;
+    comprobante =  'imagen.jpg';    
+    donanteIdInput: number = 0;
+
+
+
+
+    //Donaciones Detalle
     productoInput: string = '';
-    cantidadInput: number =10;
-    unidadmedidaInput: number = 1;
-    fechaCaducidadInput: string = '2024/06/15';
+    cantDetalleInput: number = 0;
+    unidadmedidaInput: number = 0;
+    FecCaduInput: string = '';
+
+    
 
     constructor( private elRef: ElementRef, private renderer: Renderer2,
-      private donacionService: DonacionService,
+    private donacionService: DonacionService,
     private miComponente:AppComponent,
     private donanteService: DonanteService,
     @Inject (DOCUMENT) private _document: Document,
     private authService: AuthService
     ){
       this.listarDonantes();
+      this.listarDonaciones();
 
     }
 
@@ -59,6 +78,8 @@ export class CrudDonacionComponent implements OnInit{
         }
 
         this.miComponente.menuDonante();
+
+        
         
 
       } 
@@ -72,54 +93,23 @@ export class CrudDonacionComponent implements OnInit{
         script.innerHTML = '';
         script.src = 'assets/sbadmin2/js/demo/datatables-demo.js';
         script.async = true;
-        body.appendChild(script);
-     
+        body.appendChild(script);     
     }
+
 
     
-    // Método para guardar una donación y su detalle
-guardarDonacionYDetalle() {
-  // Crear un objeto con los datos de la donación
-  const   detallesDonacion= {
-    donanteId: this.donanteIdInput,
-    // Agrega otros campos de donación según corresponda
-    fechaEntrega: this.fechaEntregaInput,
-    nrodocumento: this.nrodocumento,
-    producto: this.productoInput,
-    cantidad: this.cantidadInput,
-    // Agrega otros campos de detalle de donación según corresponda
-    fechaCaducidad: this.fechaCaducidadInput
-  };
+    listarDonaciones(){
+      this.donacionService.cargarDonaciones()
+      .subscribe((data:any)=>{
+          console.log(data);
+          //this.donacion_Lst = data;
+          this.donacion_Lst = data.filter((dony: any)  => dony.donante_id === this.donanteIdInput );
+          console.log('donaciones de: ',this.donacion_Lst)
+      })
+  }
 
-  // Crear una lista de objetos que representen los detalles de la donación
-  const donacion = [
-    {
-      tipo: 'Alimento',
-      cantidad: 10,
-      moneda: 'USD',
-      bancoOrigen: 'Banco A',
-      fechaEntrega: '2024-05-15',
-      estado: 'Nuevo',
-      comprobante: 'N/A'
-      // Otros campos de detalle según corresponda
-    }
-    // Puedes agregar más detalles según sea necesario
-  ];
 
-  // Envía la donación y sus detalles al servicio para guardarla en el backend
-  this.donacionService.guardarDonacionYDetalle(detallesDonacion,donacion).subscribe(
-    (response) => {
-      // La donación y sus detalles se han guardado exitosamente
-      console.log('Donación y detalles guardados:', response);
-
-      // Si necesitas hacer algo después de guardar la donación y sus detalles, hazlo aquí
-    },
-    (error) => {
-      // Maneja cualquier error al guardar la donación y sus detalles
-      console.error('Error al guardar donación y detalles:', error);
-    }
-  );
-}
+  
 
 
 
@@ -127,7 +117,7 @@ guardarDonacionYDetalle() {
     agregarDetalle(){
 
       if(this.productoInput === '' || this.cantidadInput ===  0 || this.unidadmedidaInput === 0
-          || this.fechaCaducidadInput === ''
+          || this.FecCaduInput === ''
        ){
           Swal.fire({
               icon:'warning',
@@ -137,21 +127,22 @@ guardarDonacionYDetalle() {
           })
        }
        else{
-          let detalle_dona = new DetalleDonacion(this.donanteIdInput,this.productoInput,this.cantidadInput, this.unidadmedidaInput ,this.fechaCaducidadInput);
+          let detalle_dona = new DetalleDonacion(this.donacionIdInput,this.productoInput,this.cantidadInput, this.unidadmedidaInput ,this.FecCaduInput);
           this.detalleDonacion_Lst.push(detalle_dona)
           //this.donanteService.agregarDonantes(donant)
           this.productoInput =  '';
           this.cantidadInput = 0;
           this.unidadmedidaInput =0;
-          this.fechaCaducidadInput  = '';
+          this.FecCaduInput  = '';
           Swal.fire({
             icon:'info',
             title:'Inserción de productos ',
             text: 'Se ha insertado correctamente  ',
-            showCloseButton: true,
-
-          
+            showCloseButton: true,          
        }  )
+       
+
+       console.log('detalle donacion: ', this.detalleDonacion_Lst);
   }
     }//Fin agregar cliente
 
@@ -189,16 +180,70 @@ guardarDonacionYDetalle() {
 
 
     
-    
-
-    agregarDonacion(){
+    //Agregar Donacion cabecera
 
 
-        //console.log(this.authService.usuarioLst);
-        console.log('session en home' , sessionStorage.getItem('mail'));
-    
-   
+    agregarDonante(){
+          console.log(' donante_id ', this.donanteIdInput)
+          let donacion = new Donacion(0, this.tipoInput, this.cantidadInput, this.monedaInput, this.bancoOrigen, this.fechaEntregaInput, this.estadoInput, this.comprobante ,24)
+          //this.donanteLst.push(donant);
+         // console.log(donacion);
+          this.donacionService.ObtenerIdDonante(donacion)
+          .subscribe(
+              (response) =>{
+                  //console.log("Resultado de guardar donante");
+                  //console.log('la donacion guardad es ',response);
+
+                  let donacionIdInput = response.toString();
+
+                  this.detalleDonacion_Lst.forEach((detalle: DetalleDonacion) => {
+                    detalle.donacion_id = parseInt(donacionIdInput); // Asignar el ID de la donación
+                });
+
+                console.log('se guardo??: ', this.detalleDonacion_Lst)
+
+
+           ;
+
+                  Swal.fire({
+                      position: "center",
+                      icon: "success",
+                      title: "Se agregó correctamente al cliente",
+                      showConfirmButton: true,
+                      showCloseButton: true,
+                      showCancelButton: true,
+                      timer: 5000 //en milisegundos
+                  });
+            
+                  this.FecCaduInput = '';
+                  this.listarDonaciones();
+
+                 // this.listarDonantes();
+              },
+              (error) => {
+
+                  Swal.fire({
+                      position: "center",
+                      icon: "warning",
+                      title: "Algo Pasó!",
+                      text: "No se logró crear el cliente, vuelva a intentar",
+                      showConfirmButton: true,
+                      showCloseButton: true,
+                      showCancelButton: true,
+                      timer: 5000 //en milisegundos
+                  });
+              }            
+          )
+          
+        
+  }//Fin agregar donaciones
+
+
+    guardarDetalleDonacion(){
+      
     }
+ 
+
 
     
 }
