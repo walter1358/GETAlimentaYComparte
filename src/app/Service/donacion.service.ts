@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DataService } from './data.service';
+import { Donacion } from '../model/donacion.model';
 
 
-@Injectable({
-  providedIn: 'root'
-})
 
+@Injectable()
 export class DonacionService {
-  constructor(private http: HttpClient) { }
+  constructor(private dataService: DataService) { }
 
-  guardarDonacion(donacion: any) {
-    return this.http.post<any>('/api/donaciones', donacion);
+  ObtenerIdDonante(donacion:Donacion){
+    return this.dataService.guardarDonacionOutId(donacion);
   }
 
-  guardarDetalleDonacion(detalle: any) {
-    return this.http.post<any>('/api/donaciones-detalles', detalle);
+  cargarDonaciones(){
+    return this.dataService.cargarDonaciones();
   }
 
-  guardarDonacionYDetalle(donacion: any, detalles: any[]) {
-    return this.http.post<any>('/api/donaciones', { donacion, detalles });
-  }
-  
 }

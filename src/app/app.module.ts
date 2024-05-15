@@ -20,6 +20,7 @@ import { PruebaComponent } from './Components/prueba/prueba.component';
 import { CrudDonantesComponent } from './Components/MantenerDonantes/crudDonantes.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetalleDonacion } from './model/detalleDonacion.model';
+import { DonacionService } from './Service/donacion.service';
 
 
 
@@ -46,6 +47,7 @@ import { DetalleDonacion } from './model/detalleDonacion.model';
     provideClientHydration(),
     DataService,
     DonanteService,
+    DonacionService,
     provideAnimationsAsync(),
 
 
