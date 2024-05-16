@@ -29,6 +29,7 @@ export class CrudDonacionComponent implements OnInit{
     donacion_Lst: Donacion[] = [];       
     donante_Lst: Donante[] = [];
     detalleDonacion_Lst: DetalleDonacion[] = [];
+    detallexId: any[] = [];
 
     titulo: string = 'GESTION DE DONACIONES DE ALIMENTOS';
 
@@ -41,7 +42,7 @@ export class CrudDonacionComponent implements OnInit{
 
     //Donaciones
     donacionIdInput: number = 0;
-    tipoInput = 1;
+    tipoInput = 2;
     cantidadInput: number = 0;
     monedaInput: string = '';
     bancoOrigen: string = '';
@@ -101,13 +102,34 @@ export class CrudDonacionComponent implements OnInit{
     }
 
 
+        //llamamos a lsitar donnates para luego filtrar por mail
+        listarDonantes(){
+          this.donanteService.obtenerDonantes()      
+          .subscribe((data:any)=>{
+              console.log(data);
+              //this.donante_Lst = data;
+    
+              this.donante_Lst = data.filter((dony: any)  => dony.email === sessionStorage.getItem('mail') );
+              this.donanteIdInput = this.donante_Lst[0].donante_id;
+              this.donanteNombreInput = this.donante_Lst[0].nombre;
+              this.documentoDonanteI = this.donante_Lst[0].nro_documento;
+              this.datosDonante = "Id: " + this.donanteIdInput + "  |  " + " Nombre: " + this.donanteNombreInput + '  |  '  + ' Documento: ' + this.documentoDonanteI
+              console.log('id: ' , this.donanteIdInput)
+    
+              console.log('Lista de donantes filtrada:', this.donante_Lst);
+          })    
+      }
+    
+ 
     
     listarDonaciones(){
-      this.donacionService.cargarDonaciones()
+      console.log('el donantes es: ',this.donanteIdInput)
+        //this.donacionService.cargarDonaciones()
+        this.donacionService.mostrarDonaciones(this.donanteIdInput)
       .subscribe((data:any)=>{
           console.log(data);
-          //this.donacion_Lst = data;
-          this.donacion_Lst = data.filter((dony: any)  => dony.donante_id === this.donanteIdInput );
+          this.donacion_Lst = data;
+          //this.donacion_Lst = data.filter((dony: any)  => dony.donante_id === this.donanteIdInput );
           console.log('donaciones de: ',this.donacion_Lst)
       })
   }
@@ -156,32 +178,16 @@ export class CrudDonacionComponent implements OnInit{
     
     
   
-    //llamamos a lsitar donnates para luego filtrar por mail
-    listarDonantes(){
-      this.donanteService.obtenerDonantes()      
-      .subscribe((data:any)=>{
-          console.log(data);
-          //this.donante_Lst = data;
 
 
-          this.donante_Lst = data.filter((dony: any)  => dony.email === sessionStorage.getItem('mail') );
-          this.donanteIdInput = this.donante_Lst[0].donante_id;
-          this.donanteNombreInput = this.donante_Lst[0].nombre;
-          this.documentoDonanteI = this.donante_Lst[0].nro_documento;
-          this.datosDonante = "Id: " + this.donanteIdInput + "  |  " + " Nombre: " + this.donanteNombreInput + '  |  '  + ' Documento: ' + this.documentoDonanteI
-          console.log('id: ' , this.donanteIdInput)
-
-          console.log('Lista de donantes filtrada:', this.donante_Lst);
-
-
-      })
-
-
-
-
-  }
-
-
+  mostrarIemDon(id:number){
+    this.donacionDetalleS.muestraDetallexId(id)
+    .subscribe((data:any)=>{
+        //console.log(data);
+        this.detallexId = data;
+        console.log(this.detallexId)
+    })
+}
     
     //Agregar Donacion cabecera
 

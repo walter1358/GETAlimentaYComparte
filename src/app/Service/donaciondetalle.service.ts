@@ -9,7 +9,12 @@ export class DonaciondetalleService {
   constructor(private dataService: DataService) { }
 
 
-  agregarDetalleDonacion(detalleDonacion: DetalleDonacion){
-      return this.dataService.guardaDetalleDonacion(detalleDonacion);
+  agregarDetalleDonacion(detalleDonacion: DetalleDonacion) {
+    return this.dataService.guardaDetalleDonacion(detalleDonacion);
   }
+
+  muestraDetallexId(id:number) {
+    return this.dataService.muestraDetalleDonacionesxId(id);
+  }
+
 }
