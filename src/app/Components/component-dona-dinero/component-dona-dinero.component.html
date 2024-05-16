@@ -114,7 +114,7 @@
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Ver mis donaciones: </h5>
-            <button id="updateModal-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button id="updateModal-close" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="listarDonaciones()">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -184,7 +184,7 @@
                         <td>{{i+1}}</td>
                         <td>{{detalle.donacionId}}</td>
                         <td>{{detalle.producto}}</td>
-                        <td>{{detalle.cantidad  | date: 'yyyy/MM/dd' }}</td>
+                        <td>{{detalle.cantidad}}</td>
                         <td>{{detalle.unidad}}</td>                   
                     </tr>
                 </tbody>

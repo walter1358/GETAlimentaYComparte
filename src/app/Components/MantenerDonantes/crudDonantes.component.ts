@@ -9,6 +9,10 @@ import { MyModalUpdateComponent } from "../my-modal-update/my-modal-update.compo
 import { AppComponent } from '../../app.component';
 import { DOCUMENT } from "@angular/common";
 import { share } from "rxjs";
+import { AuthGuard } from "../../Service/auth/auth.guard";
+import { AuthService } from "../../Service/auth/auth.service";
+
+
 
 
 
@@ -41,9 +45,12 @@ export class CrudDonantesComponent implements OnInit{
         private elRef: ElementRef, 
         private renderer: Renderer2,
         private miComponente:AppComponent,
+        private authGuard:AuthGuard,
+        private authService:AuthService,
         @Inject (DOCUMENT) private document: Document,
 
     ){
+        authService.isLoggedIn = true;  
         this.listarDonantes();
         
     }
@@ -70,6 +77,7 @@ export class CrudDonantesComponent implements OnInit{
         script.async = true;
        // body.appendChild(script);
         this.renderer.appendChild(body,script)
+        //this.authService.isLoggedIn = true;  
 
     }
 

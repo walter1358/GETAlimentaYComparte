@@ -7,6 +7,9 @@ import { HomeComponentComponent } from './Components/home/home.component.compone
 import path from 'path';
 import { VacioComponent } from './Components/vacio/vacio.component';
 import { ComponentDonaDineroComponent } from './Components/component-dona-dinero/component-dona-dinero.component';
+import { CertificacionesComponent } from './Components/certificaciones/certificaciones.component';
+import { ValidaDonacionesComponent } from './Components/valida-donaciones/valida-donaciones.component';
+import { AuthGuard } from './Service/auth/auth.guard';
 
 
 
@@ -21,12 +24,14 @@ const routes: Routes = [
   },
 
   {path: 'vacio' , component: VacioComponent,
+  canActivate:[AuthGuard],
     children: [
     //{ path: 'editar', component: FormularioComponent },
     //{ path: 'ver', component: FormularioComponent } 
     ]
   },
   {path: 'certificaciones' , component: CertificacionesComponent,
+  canActivate:[AuthGuard],
   children: [
   //{ path: 'editar', component: FormularioComponent },
   //{ path: 'ver', component: FormularioComponent } 
@@ -48,6 +53,7 @@ const routes: Routes = [
   
   {
     path: 'clientes',
+    canActivate:[AuthGuard],
     component: CrudDonantesComponent,
     children: [
       //{ path: 'editar', component: FormularioComponent },
@@ -56,6 +62,7 @@ const routes: Routes = [
   },
  {
     path: 'donaciones',
+    canActivate:[AuthGuard],
     component: CrudDonacionComponent,
     children: [
       //{ path: 'editar', component: FormularioComponent },
@@ -66,6 +73,7 @@ const routes: Routes = [
 
   {
     path: 'donaDinero',
+    canActivate:[AuthGuard],
     component: ComponentDonaDineroComponent,
     children:[
             //{ path: 'editar', component: FormularioComponent },
@@ -75,6 +83,7 @@ const routes: Routes = [
 
   {
     path:'validaDonaciones',
+    canActivate:[AuthGuard],
     component:ValidaDonacionesComponent,
     children:[
             //{ path: 'editar', component: FormularioComponent },

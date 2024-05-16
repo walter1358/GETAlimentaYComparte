@@ -1,4 +1,4 @@
-  import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetalleDonacion } from './model/detalleDonacion.model';
 import { DonacionService } from './Service/donacion.service';
 import { DonaciondetalleService } from './Service/donaciondetalle.service';
+import { ValidardonacionesService } from './Service/validardonaciones.service';
+import { ValidaDonacionesComponent } from './Components/valida-donaciones/valida-donaciones.component';
+import { AuthService } from './Service/auth/auth.service';
 
 
 
@@ -31,9 +34,9 @@ import { DonaciondetalleService } from './Service/donaciondetalle.service';
 
 @NgModule({
   declarations: [
-    AppComponent,CrudDonacionComponent, CertificacionesComponent, CrudDonantesComponent,
-     HomeComponentComponent, MyModalUpdateComponent, VacioComponent, ComponentDonaDineroComponent, PruebaComponent
-     ,LoginComponent, ValidaDonacionesComponent
+    AppComponent, CrudDonacionComponent, CrudDonantesComponent, HomeComponentComponent, MyModalUpdateComponent, VacioComponent, ComponentDonaDineroComponent,
+    PruebaComponent, LoginComponent, ValidaDonacionesComponent
+    ,CertificacionesComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { DonaciondetalleService } from './Service/donaciondetalle.service';
   providers: [
     provideClientHydration(),
     DataService,
+    AuthService,
     DonanteService,
     DonacionService,
     DonaciondetalleService,

@@ -50,7 +50,7 @@ export class ComponentDonaDineroComponent {
   fechaEntregaInput: Date = new Date('');//no va
   estadoInput = 1;//
   comprobante =  'imagen.jpg';    //
-  donanteIdInput: number = 0;
+  donanteidIn: number = 0;
 
 
   //FecCaduInput: string = '';}
@@ -59,11 +59,11 @@ export class ComponentDonaDineroComponent {
   constructor(
     private elRef: ElementRef, 
     private renderer: Renderer2,
+    @Inject (DOCUMENT) private _document: Document,
     private donacionService: DonacionService,
     private miComponente:AppComponent,
     private donanteService: DonanteService,
     private donacionDetalleS : DonaciondetalleService,
-    @Inject (DOCUMENT) private _document: Document,
     private authService: AuthService
 
   ){
@@ -79,6 +79,7 @@ export class ComponentDonaDineroComponent {
     }
 
     this.miComponente.menuDonante();
+    this.listarDonaciones();
   } 
 
 
@@ -101,11 +102,11 @@ export class ComponentDonaDineroComponent {
           //this.donante_Lst = data;
 
           this.donante_Lst = data.filter((dony: any)  => dony.email === sessionStorage.getItem('mail') );
-          this.donanteIdInput = this.donante_Lst[0].donante_id;
+          this.donanteidIn = this.donante_Lst[0].donante_id;
           this.donanteNombreInput = this.donante_Lst[0].nombre;
           this.documentoDonanteI = this.donante_Lst[0].nro_documento;
-          this.datosDonante = "Id: " + this.donanteIdInput + "  |  " + " Nombre: " + this.donanteNombreInput + '  |  '  + ' Documento: ' + this.documentoDonanteI
-          console.log('id: ' , this.donanteIdInput)
+          this.datosDonante = "Id: " + this.donanteidIn + "  |  " + " Nombre: " + this.donanteNombreInput + '  |  '  + ' Documento: ' + this.documentoDonanteI
+          console.log('id: ' , this.donanteidIn)
 
           console.log('Lista de donantes filtrada:', this.donante_Lst);
       })    
@@ -113,17 +114,19 @@ export class ComponentDonaDineroComponent {
 
 
 
-listarDonaciones(){
-  console.log('el donantes es: ',this.donanteIdInput)
-    //this.donacionService.cargarDonaciones()
-    this.donacionService.mostrarDonaciones(this.donanteIdInput)
-  .subscribe((data:any)=>{
-      console.log(data);
-      this.donacion_Lst = data;
-      //this.donacion_Lst = data.filter((dony: any)  => dony.donante_id === this.donanteIdInput );
-      console.log('donaciones de: ',this.donacion_Lst)
-  })
+  listarDonaciones(){
+    console.log('el donantes es: ',this.donanteidIn)
+     this.listarDonantes();
+      //this.donacionService.cargarDonaciones()
+      this.donacionService.mostrarDonaciones(this.donanteidIn)
+    .subscribe((data:any)=>{
+        console.log('donciones',data);
+        this.donacion_Lst = data;
+        //this.donacion_Lst = data.filter((dony: any)  => dony.donante_id === this.donanteidIn );
+        console.log('donaciones de: ',this.donacion_Lst)
+    })
 }
+
 
 
 
@@ -148,8 +151,8 @@ this.donacionDetalleS.muestraDetallexId(id)
 
 
 agregarDonante(){
-      console.log(' donante_id ', this.donanteIdInput)
-      let donacion = new Donacion(0, this.tipoInput, this.cantidadInput, this.monedaInput, this.bancoOrigen, this.fechaEntregaInput, this.estadoInput, this.comprobante ,this.donanteIdInput)
+      console.log(' donante_id ', this.donanteidIn)
+      let donacion = new Donacion(0, this.tipoInput, this.cantidadInput, this.monedaInput, this.bancoOrigen, this.fechaEntregaInput, this.estadoInput, this.comprobante ,this.donanteidIn)
       //this.donanteLst.push(donant);
      // console.log(donacion);
       this.donacionService.ObtenerIdDonante(donacion)

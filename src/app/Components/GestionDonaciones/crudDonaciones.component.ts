@@ -84,7 +84,7 @@ export class CrudDonacionComponent implements OnInit{
 
       this.miComponente.menuDonante();
 
-      
+      this.listarDonaciones();
       
 
     } 
@@ -99,6 +99,9 @@ export class CrudDonacionComponent implements OnInit{
       script.src = 'assets/sbadmin2/js/demo/datatables-demo.js';
       script.async = true;
       body.appendChild(script);     
+
+     
+
   }
 
 
@@ -121,24 +124,19 @@ export class CrudDonacionComponent implements OnInit{
     }
   
 
+    listarDonaciones(){
+      console.log('el donantes es: ',this.donanteIdInput)
+       this.listarDonantes();
+        //this.donacionService.cargarDonaciones()
+        this.donacionService.mostrarDonaciones(this.donanteIdInput)
+      .subscribe((data:any)=>{
+          console.log('donciones',data);
+          this.donacion_Lst = data;
+          //this.donacion_Lst = data.filter((dony: any)  => dony.donante_id === this.donanteIdInput );
+          console.log('donaciones de: ',this.donacion_Lst)
+      })
+  }
   
-  listarDonaciones(){
-    console.log('el donantes es: ',this.donanteIdInput)
-      //this.donacionService.cargarDonaciones()
-      this.donacionService.mostrarDonaciones(this.donanteIdInput)
-    .subscribe((data:any)=>{
-        console.log(data);
-        this.donacion_Lst = data;
-        //this.donacion_Lst = data.filter((dony: any)  => dony.donante_id === this.donanteIdInput );
-        console.log('donaciones de: ',this.donacion_Lst)
-    })
-}
-
-
-
-
-
-
 
   agregarDetalle(){
 
@@ -193,69 +191,69 @@ mostrarIemDon(id:number){
 
 
   agregarDonante(){
-        console.log(' donante_id ', this.donanteIdInput)
-        let donacion = new Donacion(0, this.tipoInput, this.cantidadInput, this.monedaInput, this.bancoOrigen, this.fechaEntregaInput, this.estadoInput, this.comprobante ,this.donanteIdInput)
-        //this.donanteLst.push(donant);
-       // console.log(donacion);
-        this.donacionService.ObtenerIdDonante(donacion)
-        .subscribe(
-            (response) =>{
-                //console.log("Resultado de guardar donante");
-                //console.log('la donacion guardad es ',response);
+    console.log(' donante_id ', this.donanteIdInput)
+    let donacion = new Donacion(0, this.tipoInput, this.cantidadInput, this.monedaInput, this.bancoOrigen, this.fechaEntregaInput, this.estadoInput, this.comprobante ,this.donanteIdInput)
+    //this.donanteLst.push(donant);
+   // console.log(donacion);
+    this.donacionService.ObtenerIdDonante(donacion)
+    .subscribe(
+        (response) =>{
+            //console.log("Resultado de guardar donante");
+            //console.log('la donacion guardad es ',response);
 
-                let donacionIdInput = response.toString();
+            let donacionIdInput = response.toString();
 
-                this.detalleDonacion_Lst.forEach((detalle: DetalleDonacion) => {
-                  detalle.donacion_id = parseInt(donacionIdInput); // Asignar el ID de la donación
-              });
+            this.detalleDonacion_Lst.forEach((detalle: DetalleDonacion) => {
+              detalle.donacion_id = parseInt(donacionIdInput); // Asignar el ID de la donación
+          });
 
-              console.log('se guardo??: ', this.detalleDonacion_Lst)
+          console.log('se guardo??: ', this.detalleDonacion_Lst)
 
-              this.detalleDonacion_Lst.forEach(detalle =>{
-                this.donacionDetalleS.agregarDetalleDonacion(detalle).subscribe(
-                  (response) => {
-                    console.log("Detalle de donación insertado correctamente:", response);
-                  },
-                  (error) => {
-                    console.log("Detalle de donación insertado correctamente:", response);
-                  }
-                )
-              })
+          this.detalleDonacion_Lst.forEach(detalle =>{
+            this.donacionDetalleS.agregarDetalleDonacion(detalle).subscribe(
+              (response) => {
+                console.log("Detalle de donación insertado correctamente:", response);
+              },
+              (error) => {
+                console.log("Detalle de donación insertado correctamente:", response);
+              }
+            )
+          })
 
 
-         ;
+     ;
 
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Se agregó correctamente su donación",
-                    showConfirmButton: true,
-                    showCloseButton: true,
-                    showCancelButton: true,
-                    timer: 5000 //en milisegundos
-                });
-          
-                //this.FecCaduInput = new Date();
-                this.listarDonaciones();
-
-               // this.listarDonantes();
-            },
-            (error) => {
-
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "Algo Pasó!",
-                    text: "No se logró crear el cliente, vuelva a intentar",
-                    showConfirmButton: true,
-                    showCloseButton: true,
-                    showCancelButton: true,
-                    timer: 5000 //en milisegundos
-                });
-            }            
-        )
-        
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Se agregó correctamente su donación",
+                showConfirmButton: true,
+                showCloseButton: true,
+                showCancelButton: true,
+                timer: 5000 //en milisegundos
+            });
       
+            //this.FecCaduInput = new Date();
+            this.listarDonaciones();
+
+           // this.listarDonantes();
+        },
+        (error) => {
+
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: "Algo Pasó!",
+                text: "No se logró crear el cliente, vuelva a intentar",
+                showConfirmButton: true,
+                showCloseButton: true,
+                showCancelButton: true,
+                timer: 5000 //en milisegundos
+            });
+        }            
+    )
+    
+  
 }//Fin agregar donaciones
 
 
