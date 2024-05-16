@@ -177,7 +177,8 @@ export class DataService {
 
   let url;
   url = "http://localhost:8080/api/donantes/";
-  return this.httpClient.put<any>(`${url}/actualizarEntidad?id=${donacionid}&nuevoValor=${estado}`, {}, { httpOptions });
+
+  return this.httpClient.put<any>(`${url}/actualizarEntidad?id=${donacionid}&nuevoValor=${estado}`, {}, httpOptions);
 
 
 
