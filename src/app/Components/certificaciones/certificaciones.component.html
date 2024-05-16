@@ -1,4 +1,69 @@
-<button (click)="generateCertificate()">
-Crear PDF
+<h3>{{titulo}}</h3>
+<hr>
+<form action="" class="form-horizontal">
 
-</button>
+<div class="row">
+
+
+<table datatable id="dataTable" class="table table-bordered">
+    <thead class="bg-info">
+        <tr class="text-white">
+            <th>#</th>
+            <th>Id</th>
+            <th>tipo Donador</th>
+            <th>Tipo Documento</th>
+            <th>DNI/RUC</th>
+            <th>Nombres</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>email</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let donante of donanteLst; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{donante.donante_id}}</td>
+            <td>{{donante.tipo_donante}}</td>
+            <td>{{donante.tipo_documento}}</td>
+            <td>{{donante.nro_documento}}</td>
+            <td>{{donante.nombre}}</td>
+            <td>{{donante.direccion}}</td>
+            <td>{{donante.telefono}}</td>
+            <td>{{donante.email}}</td>
+            <td>Proceso</td>
+            <td>
+              <!-- <button class="btn btn-warning" (click)="openModal(donante)">
+                <span class="fa fa-edit"></span>
+              </button> -->
+              <button class="btn btn-primary" (click)="generateCertificate(donante)" >
+                <i class="fa-solid fa-certificate"></i>
+              </button>
+              <!-- <button class="btn btn-danger" (click)=" eliminarDonante(donante.donante_id)">
+                <span  class="fa fa-trash"></span>
+            </button> -->
+            </td>
+        </tr>
+    </tbody>
+    <!--tfoot class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+        </tr>
+    </tfoot-->
+</table>
+
+
+<!--
+<p>
+    1 pepito, perez, 9849389843
+    2 lusitio, gomez, 48329043
+</p>
+-->
+
+<!-- Page level custom scripts -->
+<!--<script src="assets/sbadmin2/js/demo/datatables-demo.js"></script>-->

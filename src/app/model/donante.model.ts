@@ -18,7 +18,15 @@ export class Donante{
     }
     */
     //Sintaxis simplificada
-    constructor(public donante_id:number, public tipo_donante:number, public tipo_documento:number ,public nro_documento:string,public nombre:string, public direccion:string, public telefono:string, public email:string){        
+    constructor(
+        public donante_id:number, 
+        public tipo_donante:number, 
+        public tipo_documento:number ,
+        public nro_documento:string,
+        public nombre:string, 
+        public direccion:string, 
+        public telefono:string, 
+        public email:string){        
     }
 }
 
