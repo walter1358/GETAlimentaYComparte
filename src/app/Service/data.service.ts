@@ -22,6 +22,9 @@ export class DataService {
     return this.httpClient.get("http://localhost:8080/api/donaciones")
   }
 
+  dataDonacionesValidar(){
+    return this.httpClient.get("http://localhost:8080/api/validadonaciones");
+  }
   
   filtraDonantesporId(codigo : number){
     let url:string

@@ -1,1 +1,202 @@
-<p>component-dona-dinero works!</p>
+<h3>{{titulo}}</h3>
+<hr>
+<section style="width: 80%; margin: 0 auto; padding: 20px; background-color: #eff7f5de; border: 1px solid #ccc;">
+    <form action="" class="form-horizontal">
+
+        <!-- <div class="row">
+            <div class="form-group col-md-2">
+                <button class="btn btn-primary" (click)="agregarDonacion()">
+                   Buscar
+                </button>
+            </div>
+        </div>
+        
+        <div class="form-group col-md-2">
+            <label for="">Tipo de Donador:</label>
+            <input type="text" name="tipo" id="tipo"
+                placeholder="DNI/RUC" class="form-control">
+                  
+        </div> -->
+    
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label for="">Donante Id</label>
+                <input type="text" name="donanteId" id="donanteId"
+                    placeholder="donanteId" class="form-control" [(ngModel)] = "datosDonante"  disabled="">
+            </div>        
+        </div>
+    
+    
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label for="">Cantidad:</label>
+                <input type="text" name="cantidad" id="cantidad"
+                    placeholder="cantidad" class="form-control"
+                    [(ngModel)] = "cantidadInput">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="">Moneda:</label>
+                <select name="moneda" id="moneda" placeholder="moneda" class="form-control" [(ngModel)] = "monedaInput">
+                    <option value="sol">Soles</option>
+                    <option value="dol">Dolares</option>            
+                </select>
+            </div>
+                  <div class="form-group  col-md-2">
+                    <label for="bancoOrigen" class="form-label">Banco Origen:</label>
+                    <select id="bancoOrigen" name="bancoOrigen" class="form-control" [(ngModel)] = "bancoOrigen">
+                      <option value="BCP">Banco de Credito</option>
+                      <option value="BBVA">Banco Continental</option>
+                      <option value="ibk">Interbank</option>
+                      <option value="sbk">Scotiabank</option>
+                      <option value="bif">Banbif</option>
+                      <option value="mibanco">Mi banco</option>
+                      <option value="falabella">Falabella</option>
+                      <option value="ripley">Banco Ripley</option>
+                      <option value="santander">Santander</option>
+                      <option value="arequipa">Caja Arequipa</option>
+                      <option value="pichincha">Banco Pichincha</option>
+                      <option value="otro">Otro...</option>
+                    </select>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="">Comprobante:</label>
+                <input type="text"  name="comprobante" id="comprobante"
+                placeholder="comprobante" class="form-control"
+                [(ngModel)] = "comprobante" placeholder="comprobante">
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="form-group col-md-1">
+                <button class="btn btn-info" (click)="agregarDonante()">
+                    Guardar
+                </button>
+            </div>
+            <div class="form-group col-md-2">
+                <button class="btn btn-info" data-toggle="modal" data-target="#donacionesModal">
+                    ver mis donaciones
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+<br>
+<section style="width: 80%; height: inherit; ;margin: 0 auto; padding: 20px; background-color: #eff7f5de; border: 1px solid #ccc;">
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center fw-bold">Gracias por sumarse a la iniciativa</h2>
+                <p class=" text-center fw-bold">Escanee el código QR para realizar su donación.</p>
+                <!-- Inserta aquí el código QR -->
+            </div>
+            <div class="col-md-6">
+                <div class="image-upload">
+                    <h2>Subir imagen</h2>
+                    <p>Seleccione una imagen desde su dispositivo.</p>
+                    <input type="file" class="btn btn-primary" [(ngModel)] = "comprobante" accept="image/*" >
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5 mb-5" >
+            <div class="col-md-6 text-center d-flex justify-content-center align-items-center">
+                <img src="/assets/img/yape.png" alt="Yape Logo">
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Modal ver donaciones -->
+<div class="modal fade" id="donacionesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ver mis donaciones: </h5>
+            <button id="updateModal-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            
+        <table datatable id="dataTable2"  class="table table-bordered">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th>#</th>
+                        <th>Donacion ID</th>
+                        <th>Tipo</th>
+                        <th>Fecha Entrega</th>
+                        <th>Estado</th>
+                        <th>acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let donacion of donacion_Lst; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{donacion.donacion_id}}</td>
+                        <td>{{donacion.tipo}}</td>
+                        <td>{{donacion.fecha_entrega  | date: 'yyyy/MM/dd' }}</td>
+                        <td>{{donacion.estado}}</td>
+                        <td>
+                          <button class="btn btn-info" data-toggle="modal" data-target="#detalleModal" (click)="mostrarIemDon(donacion.donacion_id)">
+                            <span  class="fa fa-search" ></span>
+                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+        </table>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal detalleDonaciones -->
+<div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ver mis donaciones: </h5>
+            <button id="updateModal-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+        <table datatable id="dataTable2"  class="table table-bordered">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th>#</th>
+                        <th>donacion Id </th>
+                        <th>producto</th>
+                        <th>Cantidad</th>
+                        <th>unidad medida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detalle of detallexId; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{detalle.donacionId}}</td>
+                        <td>{{detalle.producto}}</td>
+                        <td>{{detalle.cantidad  | date: 'yyyy/MM/dd' }}</td>
+                        <td>{{detalle.unidad}}</td>                   
+                    </tr>
+                </tbody>
+        </table>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+    
+

@@ -1,0 +1,133 @@
+<section>
+    <br>
+    <br>
+</section>
+<br>
+<br>    
+<br>    
+<br>
+
+    <table datatable id="dataTable" class="table table-bordered">
+        <thead class="bg-info">
+            <tr class="text-white">
+                <!--<th>#</th>-->
+                <th>donacion id</th>
+                <th>tipo persona</th>
+                <th>nombre</th>
+                <th>tipodoc</th>
+                <th>nro_documento</th>
+                <th>telefono</th>
+                <th>email</th>
+                <th>cantidad</th>
+                <th>moneda</th>
+                <th>banco_origen</th>
+                <th>fecha_entrega</th>
+                <th>estado</th>
+                <th>comprobante</th>
+                <th>tipo donacion</th>
+                <th>Acciones</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let donaciones of lst_donacionesporvalidar; let i = index">
+                <!--<td>{{i+1}}</td>-->
+                <td>{{donaciones.donacion_id}}</td>
+                <td>{{donaciones.tipopersona}}</td>
+                <td>{{donaciones.nombre}}</td>
+                <td>{{donaciones.tipodoc}}</td>
+                <td>{{donaciones.nro_documento}}</td>
+                <td>{{donaciones.telefono}}</td>                
+                <td>{{donaciones.email}}</td>
+                <td>{{donaciones.cantidad}}</td>
+                <td>{{donaciones.moneda}}</td>
+                <td>{{donaciones.banco_origen}}</td>
+                <td>{{donaciones.fecha_entrega}}</td>
+                <td>{{donaciones.estado}}</td>
+                <td>{{donaciones.comprobante}}</td>
+                <td>{{donaciones.tipodonacion}}</td>
+
+                <td>
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#imagenModal"> Revisar voucher<!--(click)="openModal(donante)"-->
+                        <span class="fa fa-edit"></span>
+                      </button>
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#detalleModal" (click)="mostrarIemDon(donaciones.donacion_id)">Ver items
+                        <span class="fa fa-search"></span>
+                      </button>
+                      <button class="btn btn-info" >aprobar<!--(click)=" eliminarDonante(donante.donante_id)"-->
+                        <span  class="fa fa-check"></span>
+                    </button>  
+                </td>
+            </tr>
+        </tbody>
+        <!--tfoot class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>DNI</th>
+                <th>Acciones</th>
+            </tr>
+        </tfoot-->
+    </table>
+
+    <div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="imagenModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="imagenModalLabel">Comprobante Yape</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <img src="/assets/img/comprobanteyape.jpeg" class="img-fluid" alt="Comprobante Yape">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>            
+          </div>
+        </div>
+      </div>
+
+<!-- Modal detalleDonaciones -->
+<div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ver mis donaciones: </h5>
+            <button id="updateModal-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+        <table datatable id="dataTable2"  class="table table-bordered">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th>#</th>
+                        <th>donacion Id </th>
+                        <th>producto</th>
+                        <th>Cantidad</th>
+                        <th>unidad medida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detalle of detallexId; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{detalle.donacionId}}</td>
+                        <td>{{detalle.producto}}</td>
+                        <td>{{detalle.cantidad  | date: 'yyyy/MM/dd' }}</td>
+                        <td>{{detalle.unidad}}</td>                   
+                    </tr>
+                </tbody>
+        </table>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+          
+
