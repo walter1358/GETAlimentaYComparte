@@ -29,12 +29,29 @@ export class DataService {
     return this.httpClient.get(url)
   }
 
+  muestraDetalleDonacionesxId(codigo: number)
+  {
+    let url:string
+    url = 'http://localhost:8080/api/detalles/' + codigo;
+    return this.httpClient.get(url)
+  }
+  
+  muestraDonacionesXDonante(codigo: number)
+  {
+    let url:string
+    url = 'http://localhost:8080/api/donacionesdonante/' + codigo;
+    return this.httpClient.get(url)
+  }
+
+
   filtrarPorMail(email:string){
     let url:string
     url = 'http://localhost:8080/api/donantes/email/' + email;
     return this.httpClient.get(url)
 
   }
+
+
 
   modificarDonante(donante:Donante){
       return this.httpClient.put(" http://localhost:8080/api/donantesupt",donante);

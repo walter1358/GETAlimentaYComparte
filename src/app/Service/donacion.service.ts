@@ -17,4 +17,8 @@ export class DonacionService {
     return this.dataService.cargarDonaciones();
   }
 
+  mostrarDonaciones(codigo:number){
+    return this.dataService.muestraDonacionesXDonante(codigo);
+  }
+
 }
