@@ -1,6 +1,11 @@
-import { Component, ElementRef, Inject, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit ,  ElementRef, Renderer2 , Inject, Injectable, ElementRef, Inject, OnInit, Renderer2 } from "@angular/core";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { DOCUMENT } from "@angular/common";
+import { AppComponent } from "../../app.component";
+
+
+
 import { Donacion } from '../../model/donacion.model';
 import { Donante } from '../../model/donante.model';
 import { DetalleDonacion } from '../../model/detalleDonacion.model';
@@ -22,232 +27,28 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   templateUrl: './certificaciones.component.html',
   styleUrls: ['./certificaciones.component.css']
 })
-export class CertificacionesComponent implements OnInit{
-  
-  donanteLst: Donante[] = [
-    new  Donante(1,1,1,"45612144","Renzo Quelopana Pantigoso","Av. Brasil","946588155","correo@correo"),
-    new  Donante(1,1,1,"45612144","Walter","Av. Brasil","946588155","correo@correo"),
-    new  Donante(1,1,1,"45612144","Yeltsin","Av. Brasil","946588155","correo@correo"),
-    new  Donante(1,1,1,"45612144","Victor","Av. Brasil","946588155","correo@correo")
-      //Donante(donante_id: number, tipo_donante: number, tipo_documento: number, nro_documento: string, nombre: string, direccion: string, telefono: string,
-  ];
+export class CertificacionesComponent {
 
-  titulo: string = 'GENERACION DE CERTIFICADOS';
-
-  donante_id_input: number = 0;
-  tipo_donante: number =  0;
-  tipo_documento: number = 0;
-  nrodocumentoinput: string='';
-  nombreInput: string = '';
-  direccionInput: string ='';
-  telefonoInput: string = '';
-  emailInput: string = '';
-
-
-  constructor(
-      private donanteService : DonanteService,
-      public dialog: MatDialog,
-      private elRef: ElementRef, 
-      private renderer: Renderer2,
-      private miComponente:AppComponent,
-      @Inject (DOCUMENT) private document: Document,
-
-  ){
-      this.listarDonantes();
-      
+  ngOnInit() {
   }
 
   ngAfterViewInit() {
-      const button = this.document.getElementById('accordionSidebar');
-      if (button) {
-        this.renderer.setStyle(button, 'display', 'block');
-      }
-
-      this.miComponente.menuAnalista();
-      
-    } 
-    
-  
-
-
-  //Ejemplo de añadir js directamente
-  ngOnInit(){
-      let body = this.document.body;
-      let script = this.document.createElement('script');
-      script.innerHTML = '';
-      script.src = 'assets/sbadmin2/js/demo/datatables-demo.js';
-      script.async = true;
-     // body.appendChild(script);
-      this.renderer.appendChild(body,script)
-
-  }
-
-  
-      openModal(donante: Donante) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.width = '800px'; // Establece el ancho del modal
-      dialogConfig.height = '700px'; // Establece la altura del modal
-      dialogConfig.data = { donante }; // Pasar el objeto Donante como parte de los datos del modal
-
-  
-
-      this.dialog.open(MyModalUpdateComponent, dialogConfig);
-
-       this.dialog.afterAllClosed.subscribe(() => {
-          // Este código se ejecutará cuando el modal se cierre
-          // Aquí puedes llamar al método listarDonantes() u otra lógica que necesites
-          this.listarDonantes();
-        });
+    const button = this._document.getElementById('accordionSidebar');
+    if (button) {
+      this.renderer.setStyle(button, 'display', 'block');
     }
-    
-    tiposDonador: { id: number, nombre: string }[] = [
-      { id: 1, nombre: 'Persona natural' },
-      { id: 2, nombre: 'Persona jurídica' }
-    ]; // Lista de opciones para el combobox
-    tipoSeleccionado: number = 1; // Variable para almacenar el tipo seleccionado
 
-    tipoDocumento: { id: number, nombre: string }[] = [
-      { id: 1, nombre: 'DNI' },
-      { id: 2, nombre: 'RUC' },
-      { id:3 , nombre: 'CE'}
-    ]; // Lista de opciones para el combobox
-   // Variable para almacenar el tipo seleccionado
+    this.miComponente.menuDonante();
+  } 
 
-
-
-
-  //Ejemplo de añadir js directamente
-
-  listarDonantes(){
-      this.donanteService.obtenerDonantes()
-      .subscribe((data:any)=>{
-          console.log(data);
-          this.donanteLst = data;
-      })
-  }
-
-
-
-
-  
-
-  agregarDonante(){
-
-      if(this.nrodocumentoinput === '' || this.nombreInput === '' || this.direccionInput === ''
-          || this.telefonoInput === ''  || this.emailInput=== '' 
-       ){
-          Swal.fire({
-              icon:'warning',
-              title:'Hay campos vacíos',
-              text: 'Complete los campos solicitados',
-              showCloseButton: true,
-          })
-       }
-       else{
-          let donant = new Donante(this.donante_id_input,this.tipo_donante, this.tipo_documento ,this.nrodocumentoinput,this.nombreInput, this.direccionInput, this.telefonoInput, this.emailInput);
-          //this.donanteLst.push(donant);
-          this.donanteService.agregarDonantes(donant)
-          .subscribe(
-              (response) =>{
-                  console.log("Resultado de guardar donante");
-                  console.log(response);
-
-                  Swal.fire({
-                      position: "center",
-                      icon: "success",
-                      title: "Se agregó correctamente al cliente",
-                      showConfirmButton: true,
-                      showCloseButton: true,
-                      showCancelButton: true,
-                      timer: 5000 //en milisegundos
-                  });
-            
-                  this.donante_id_input = 0;
-                  this.tipo_donante =  0;
-                  this.tipo_documento = 0;
-                  this.nrodocumentoinput ='';
-                  this.nombreInput  = '';
-                  this.direccionInput  ='';
-                  this.telefonoInput  = '';
-                  this.emailInput  = '';
-                  this.listarDonantes();
-              },
-              (error) => {
-
-                  Swal.fire({
-                      position: "center",
-                      icon: "warning",
-                      title: "Algo Pasó!",
-                      text: "No se logró crear el cliente, vuelva a intentar",
-                      showConfirmButton: true,
-                      showCloseButton: true,
-                      showCancelButton: true,
-                      timer: 5000 //en milisegundos
-                  });
-              }            
-          )
-          
-       }  
-  }//Fin agregar cliente
-  
-
-  eliminarDonante(id: number) {
-      Swal.fire({
-          title: '¿Estás seguro?',
-          text: 'Esta acción no se puede revertir',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sí, eliminar',
-          cancelButtonText: 'Cancelar',
-
-      }).then((result) => {
-          if (result.isConfirmed) {
-              this.donanteService.deleteDonante(id).subscribe(
-                  () => {
-                      Swal.fire(
-                          '¡Eliminado!',
-                          'El donante ha sido eliminado.',
-                          'success'
-                      );
-                      this.listarDonantes();
-                
-
-                  },
-                  (error) => {
-                      console.error('Error al eliminar el donante', error);
-                      Swal.fire(
-                          '¡Error!',
-                          'No se pudo eliminar el donante.',
-                          'error'
-                      );
-                  }
-              );
-          }
-      });
-  } // fin de eliminar 
-
-  getDataForPDF(donante: Donante) {
-    return [{
-        Id: donante.donante_id,
-        Tipo_Donador: donante.tipo_donante,
-        Tipo_Documento: donante.tipo_documento,
-        DNI_RUC: donante.nro_documento,
-        Nombres: donante.nombre,
-        Dirección: donante.direccion,
-        Teléfono: donante.telefono,
-        Email: donante.email
-    }];
-}
-
-  
-
-
-  // createPdf() {
-    // const pdfDefinition: any = {
-    //   content: [{
-    //     text: 'Hola Mundo'
-    //   }]
-    // };
+/*
+  createPdf() {
+     const pdfDefinition: any = {
+       content: [{
+         text: 'Hola Mundo'
+       }]
+     }};
+*/
 
     getBase64Image(): string {
       const canvas = document.createElement('canvas');
@@ -269,12 +70,44 @@ export class CertificacionesComponent implements OnInit{
       const data = this.getDataForPDF(donante); // Pasa el donante como argumento
     
       const docDefinition = {
-        content: [],
-        pageOrientation: 'landscape', // Establecer orientación horizontal
-        background: [
+        content: [
           {
-            image: 'backgroundImage',
-            width: 800 // Ancho de la imagen de fondo
+            image: 'logo_final.png', // Ruta a tu imagen de logo
+            width: 200,
+            alignment: 'center',
+            margin: [0, 20, 0, 20]
+          },
+          {
+            text: 'CERTIFICADO DE AGRADECIMIENTO',
+            style: 'header'
+          },
+          {
+            text: 'La Asociación "Alimenta y Comparte" expresa su más sincero agradecimiento a:',
+            style: 'subheader'
+          },
+          {
+            text: 'Nombre del Donante',
+            style: 'donorName'
+          },
+          {
+            text: 'por su generosa contribución de alimentos/dinero.',
+            style: 'contribution'
+          },
+          {
+            text: 'Esta contribución ha sido invaluable para apoyar nuestra misión de ayudar a las personas necesitadas.',
+            style: 'description'
+          },
+          {
+            text: 'Fecha: 16 de mayo de 2024',
+            style: 'date'
+          },
+          {
+            text: 'Firma:',
+            style: 'signature'
+          },
+          {
+            text: 'Nombre del Presidente de la Asociación "Alimenta y Comparte"',
+            style: 'presidentName'
           }
         ],
         styles: {

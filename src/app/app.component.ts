@@ -6,6 +6,8 @@ import { DOCUMENT } from "@angular/common";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocalStorageService } from 'ngx-localstorage';
 import { Usuario } from './model/Usuario.model';
+import { AuthService } from './Service/auth/auth.service';
+
 
 
  
@@ -23,7 +25,7 @@ export class AppComponent implements OnInit{
 
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef,
-    @Inject (DOCUMENT) private document: Document,
+    @Inject (DOCUMENT) private document: Document,public authService: AuthService
   ) {
   }
  

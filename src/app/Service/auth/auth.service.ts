@@ -31,19 +31,23 @@ export class AuthService {
       //Aquí se puede aplicar la inserción de items en el sessionStorage, localStorage
 
       if(userFound){
-        this.isLoggedIn = true;
+        //this.isLoggedIn = true;
+        //sessionStorage.setItem('logeo',this.isLoggedIn  )
         this.email = userFound?.email;
         this.router.navigate(['/vacio'])
         this.usuarioLst.push(usuario);
         console.log(this.usuarioLst);
         sessionStorage.setItem('mail', userFound?.email)
        console.log('session storage', sessionStorage.getItem('mail'));
-
+       console.log('la sesion esta: ', this.isLoggedIn)
+        console.log(this.isAuthenticated())
+        sessionStorage.setItem('isLoggedIn', JSON.stringify(true)); 
       }else{
               // Usuario o contraseña incorrectos
-      this.isLoggedIn = false;
+     // this.isLoggedIn = false;
+     sessionStorage.setItem('isLoggedIn', JSON.stringify(false)); 
       this.router.navigate(['/login'])
-
+      console.log('la sesion esta: ', this.isLoggedIn)
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -64,7 +68,10 @@ export class AuthService {
   }
 
   isAuthenticated():boolean{
-      return this.isLoggedIn;
+    //  return this.isLoggedIn;
+    const isLoggedInn = JSON.parse(sessionStorage.getItem('isLoggedIn')); // Supongamos que isLoggedIn es el nombre de la clave que usaste anteriormente
+
+    return isLoggedInn
   }
 
 
