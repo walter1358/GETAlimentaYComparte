@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetalleDonacion } from './model/detalleDonacion.model';
 import { DonacionService } from './Service/donacion.service';
 import { DonaciondetalleService } from './Service/donaciondetalle.service';
+//import {pdfFonts} from 'pdfmake/build/vfs_fonts';
 
 
 
