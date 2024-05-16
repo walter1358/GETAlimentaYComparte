@@ -7,7 +7,6 @@ import { HomeComponentComponent } from './Components/home/home.component.compone
 import path from 'path';
 import { VacioComponent } from './Components/vacio/vacio.component';
 import { ComponentDonaDineroComponent } from './Components/component-dona-dinero/component-dona-dinero.component';
-import { ValidaDonacionesComponent } from './Components/valida-donaciones/valida-donaciones.component';
 
 
 
@@ -27,6 +26,12 @@ const routes: Routes = [
     //{ path: 'ver', component: FormularioComponent } 
     ]
   },
+  {path: 'certificaciones' , component: CertificacionesComponent,
+  children: [
+  //{ path: 'editar', component: FormularioComponent },
+  //{ path: 'ver', component: FormularioComponent } 
+  ]
+},
 
 
   /*{

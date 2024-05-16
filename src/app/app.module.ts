@@ -22,8 +22,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetalleDonacion } from './model/detalleDonacion.model';
 import { DonacionService } from './Service/donacion.service';
 import { DonaciondetalleService } from './Service/donaciondetalle.service';
-import { ValidaDonacionesComponent } from './Components/valida-donaciones/valida-donaciones.component';
-import { ValidardonacionesService } from './Service/validardonaciones.service';
 
 
 
