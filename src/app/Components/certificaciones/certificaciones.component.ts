@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit ,  ElementRef, Renderer2 , Inject, Injectable } from "@angular/core";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { DOCUMENT } from "@angular/common";
+import { AppComponent } from "../../app.component";
+
+
+
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -11,25 +16,45 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class CertificacionesComponent {
 
+  constructor(
+    private renderer: Renderer2,
+    @Inject (DOCUMENT) private _document: Document,
+    private miComponente:AppComponent
+  ){
+    
+  }
+
   ngOnInit() {
   }
 
-  // createPdf() {
-    // const pdfDefinition: any = {
-    //   content: [{
-    //     text: 'Hola Mundo'
-    //   }]
-    // };
+  ngAfterViewInit() {
+    const button = this._document.getElementById('accordionSidebar');
+    if (button) {
+      this.renderer.setStyle(button, 'display', 'block');
+    }
+
+    this.miComponente.menuDonante();
+  } 
+
+/*
+  createPdf() {
+     const pdfDefinition: any = {
+       content: [{
+         text: 'Hola Mundo'
+       }]
+     }};
+*/
 
     generateCertificate() {
       const docDefinition = {
         content: [
+          /*
           {
             image: 'logo_final.png', // Ruta a tu imagen de logo
             width: 200,
             alignment: 'center',
             margin: [0, 20, 0, 20]
-          },
+          },*/
           {
             text: 'CERTIFICADO DE AGRADECIMIENTO',
             style: 'header'

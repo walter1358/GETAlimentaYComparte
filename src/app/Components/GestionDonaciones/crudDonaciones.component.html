@@ -80,7 +80,7 @@
             </button>
         </div>
         <div class="form-group col-md-2">
-            <button class="btn btn-info" data-toggle="modal" data-target="#donacionesModal">
+            <button class="btn btn-info" data-toggle="modal" data-target="#donacionesModal" (click)="listarDonaciones()">
                 ver mis donaciones
             </button>
         </div>
@@ -142,7 +142,7 @@
                         <td>{{i+1}}</td>
                         <td>{{donacion.donacion_id}}</td>
                         <td>{{donacion.tipo}}</td>
-                        <td>{{donacion.fecha_entrega  | date: 'yyyy/MM/dd' }}</td>
+                        <td>{{donacion.fecha_entrega | date: 'yyyy/MM/dd' }}</td>
                         <td>{{donacion.estado}}</td>
                         <td>
                           <button class="btn btn-info" data-toggle="modal" data-target="#detalleModal" (click)="mostrarIemDon(donacion.donacion_id)">
@@ -190,7 +190,7 @@
                         <td>{{i+1}}</td>
                         <td>{{detalle.donacionId}}</td>
                         <td>{{detalle.producto}}</td>
-                        <td>{{detalle.cantidad  | date: 'yyyy/MM/dd' }}</td>
+                        <td>{{detalle.cantidad}}</td>
                         <td>{{detalle.unidad}}</td>                   
                     </tr>
                 </tbody>
