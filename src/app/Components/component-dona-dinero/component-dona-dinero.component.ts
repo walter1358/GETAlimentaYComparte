@@ -91,6 +91,9 @@ export class ComponentDonaDineroComponent {
     script.src = 'assets/sbadmin2/js/demo/datatables-demo.js';
     script.async = true;
     body.appendChild(script);     
+
+    this.listarDonantes();
+    this.listarDonaciones();
 }
 
 

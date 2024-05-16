@@ -76,14 +76,17 @@ export class DataService {
   
   muestraDonacionesXDonante(codigo: number)
   {
-    let url:string
-    url = 'http://localhost:8080/api/donacionesdonante/' + codigo;
+
     const httpOptions = {
       headers: new HttpHeaders({
           'content-type':'application/json',
           'Authorization': 'Basic cGVwaXRvOjQ4ZDI3ZDg3LTEzNWMtMDkyOS04Yzg3LWRkODg5NjUyOTNkMg=='
       })
   }
+  
+    let url:string
+    url = 'http://localhost:8080/api/donacionesdonante/' + codigo;
+
     return this.httpClient.get(url,httpOptions)
   }
 
@@ -159,6 +162,24 @@ export class DataService {
     let url: string;
     url = "http://localhost:8080/api/donantes/" + codigo;
     return this.httpClient.delete(url,httpOptions);
+
+  }
+
+  //SP para actualizar el estado de la donacion//
+
+  uptEstadoDonacion(donacionid: number, estado: number){
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'content-type':'application/json',
+          'Authorization': 'Basic cGVwaXRvOjQ4ZDI3ZDg3LTEzNWMtMDkyOS04Yzg3LWRkODg5NjUyOTNkMg=='
+      })
+  } 
+
+  let url;
+  url = "http://localhost:8080/api/donantes/";
+  return this.httpClient.put<any>(`${url}/actualizarEntidad?id=${donacionid}&nuevoValor=${estado}`, {}, { httpOptions });
+
+
 
   }
 
