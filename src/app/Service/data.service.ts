@@ -164,7 +164,7 @@ export class DataService {
     return this.httpClient.delete(url,httpOptions);
 
   }
-
+ 
   //SP para actualizar el estado de la donacion//
 
   uptEstadoDonacion(donacionid: number, estado: number){
@@ -176,13 +176,12 @@ export class DataService {
   } 
 
   let url;
-  url = "http://localhost:8080/api/donantes/";
+  url = "http://localhost:8080/api/actualizarEstadodonacion";
 
-  return this.httpClient.put<any>(`${url}/actualizarEntidad?id=${donacionid}&nuevoValor=${estado}`, {}, httpOptions);
+  return this.httpClient.put<any>(`${url}?donacionid=${donacionid}&estado=${estado}`, {}, httpOptions);
 
 
-
-  }
+  } 
 
 
 

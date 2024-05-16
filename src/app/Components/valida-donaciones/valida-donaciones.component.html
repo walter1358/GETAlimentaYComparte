@@ -1,12 +1,47 @@
 <section>
-    <br>
-    <br>
+Gestion de donaciones
 </section>
 <br>
 <br>    
 <br>    
 <br>
 
+<div class="row">
+    <p>Guia de botones</p>
+</div>
+<div class="container row">
+    <div class="row">
+        <div class="col-md-1">
+            <td class="button-cell" style="background-color: transparent;">
+                <button class="btn btn-primary"><span class="fa fa-search"></span></button>
+                <p href="">Ver items</p>
+        </div>
+        <div class="col-md-1"></div> 
+        <div class="col-md-1">
+            <td class="button-cell" style="background-color: transparent;">
+            <button class="btn btn-warning"><span class="fa fa-edit"></span></button>
+            <p href="">Revisar voucher</p>
+        </div>
+        <div class="col-md-1"></div>        
+        <div class="col-md-1">
+            <td class="button-cell" style="background-color: transparent;">
+                <button class="btn btn-info"><span class="fa fa-check"></span></button>
+                <p href="">Aprobar</p>
+        </div>
+        <div class="col-md-1"></div>        
+        <div class="col-md-1">
+            <td class="button-cell" style="background-color: transparent;">
+    
+                <button class="btn btn-danger"><span class="fa fa-times"></span></button>
+                <p href="">Rechazar</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<br>
     <table datatable id="dataTable" class="table table-bordered">
         <thead class="bg-info">
             <tr class="text-white">
@@ -48,15 +83,19 @@
                 <td>{{donaciones.tipodonacion}}</td>
 
                 <td>
-                    <button class="btn btn-warning" data-toggle="modal" data-target="#imagenModal"> Revisar voucher<!--(click)="openModal(donante)"-->
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#imagenModal" (click)="actualizarDonacion(donaciones.donacion_id,2)"><!--(click)="openModal(donante)"-->
                         <span class="fa fa-edit"></span>
                       </button>
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#detalleModal" (click)="mostrarIemDon(donaciones.donacion_id)">Ver items
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#detalleModal" (click)="mostrarIemDon(donaciones.donacion_id)">
                         <span class="fa fa-search"></span>
                       </button>
-                      <button class="btn btn-info" >aprobar<!--(click)=" eliminarDonante(donante.donante_id)"-->
+                      <button class="btn btn-info"  (click)="actualizarDonacion(donaciones.donacion_id,3)"><!--(click)=" eliminarDonante(donante.donante_id)"-->
                         <span  class="fa fa-check"></span>
                     </button>  
+                    <button class="btn btn-danger"  (click)="actualizarDonacion(donaciones.donacion_id,4)"><!--(click)=" eliminarDonante(donante.donante_id)"-->
+                        <span  class="fa fa-times"></span>
+                    </button>  
+
                 </td>
             </tr>
         </tbody>
@@ -123,7 +162,7 @@
             
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" (click)="listarDonacionesxAprobar();" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
         </div>
     </div>

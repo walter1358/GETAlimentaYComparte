@@ -3,6 +3,7 @@ import { AppComponent } from '../../app.component';
 import { DOCUMENT } from "@angular/common";
 import { ValidardonacionesService } from "../../Service/validardonaciones.service";
 import { DonaciondetalleService } from "../../Service/donaciondetalle.service";
+import Swal from "sweetalert2";
 
 
 
@@ -27,6 +28,23 @@ export class ValidaDonacionesComponent implements OnInit{
 
   lst_donacionesporvalidar: any[] = [];
   detallexId: any[] = [];
+
+  actualizarDonacion(donacionid: number, estado: number): void {
+    this.validardonacionesService.actualizaestado(donacionid, estado).subscribe(
+      response => {
+        console.log('Respuesta:', response);
+        this.listarDonacionesxAprobar();
+        //Swal.fire('Correcto', 'La actualización se realizó correctamente', 'success'); // Muestra un mensaje de éxito
+        // Aquí puedes manejar la respuesta según necesites
+      },
+      error => {
+        console.error('Error:', error);
+        this.listarDonacionesxAprobar();
+        //Swal.fire('Error', 'Hubo un error al realizar la actualización', 'error'); // Muestra un mensaje de error
+        // Aquí puedes manejar el error según necesites
+      }
+    );
+  }
 
 
 
@@ -68,6 +86,8 @@ export class ValidaDonacionesComponent implements OnInit{
               //console.log(data);
               this.detallexId = data;
               console.log(this.detallexId)
+
+              this.actualizarDonacion(id,2)
           })
         }
           

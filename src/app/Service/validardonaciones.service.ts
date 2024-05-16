@@ -11,5 +11,8 @@ export class ValidardonacionesService {
     return this.dataService.dataDonacionesValidar();
   }
 
+  actualizaestado(donacionid: number, estado: number){
+    return this.dataService.uptEstadoDonacion(donacionid, estado)
+  }
   
 }
